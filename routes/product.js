@@ -5,13 +5,14 @@ const path=require('path');
 const {getReview, modifyReview, deleteReview,uploadReview} =require('../controllers/review');
 const {getCart, modifyCart, deleteCart}=require('../controllers/cart')
 const { getEnquiry, uploadEnquiry, modifyEnquiry, deleteEnquiry } =require('../controllers/enquiry');
-const { getProducts } = require('../controllers/product');
+const { getProducts,deleteProduct, modifyProduct } = require('../controllers/product');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 //put과 post에 차이가 있나?
 
 //
 router.get('/',getProducts);
-
+router.delete('/:productid',deleteProduct);
+router.patch("/", modifyProduct);
 
 // /products/review/ -> 아이디 필요 x 물건에 대한 리뷰만 가져오면 된다.
 router.get('/review', getReview); 
