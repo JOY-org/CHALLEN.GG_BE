@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const multer= require('multer');
-const path=require('path')
+const path=require('path');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
-
+const {getCommunity, deleteCommunity, modifyCommunity }=require('../controllers/community');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -19,8 +19,9 @@ const limits={fileSize: 10 *1024*1024}
 const imgupload=multer({
     storage,
     limits
-}) // 개시글 만들 때 필요하다.
+}) // 커뮤니티 대표사진
 
+router.get('/', getCommunity);
 
 
 module.exports = router;
