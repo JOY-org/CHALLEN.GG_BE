@@ -1,4 +1,4 @@
-const {User, Product, Cart} = require('../models');
+const {User, Products, Cart} = require('../models');
 
 exports.dummyInput = async (req, res, next)=>{
     const user_dummy = [
@@ -12,7 +12,7 @@ exports.dummyInput = async (req, res, next)=>{
     ]
     try {
         await User.bulkCreate(user_dummy);
-        await Product.bulkCreate(prod_dummy);
+        await Products.bulkCreate(prod_dummy);
         
         res.json({'res':'dummydata input ok'});
     } catch (error) {
