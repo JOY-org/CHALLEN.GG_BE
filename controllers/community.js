@@ -28,7 +28,7 @@ exports.modifyCommunity = async (req, res, next) => {
 
         res.json({
             code: 200,
-            message: '사용자 정보 수정 완료'
+            message: '커뮤니티 수정 완료'
         });
     } catch (err) {
         console.error(err);
