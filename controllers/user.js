@@ -19,15 +19,9 @@ exports.getUser = async(req,res,next)=>{
 
 exports.modifyUser = async(req,res,next)=>{
     try {
-        await User.update({
-            nickname:req.body.nickname,
-            img:req.body.img,
-            exp:req.body.exp
-        },{
-            where:{id:req.params.userid}
-        })
+        await User.update(req.body,{where:{id:req.params.userid}})
         res.json({
-            code:20,
+            code:200,
             message:'수정이 완료되었습니다'
         })
     } catch (err) {
@@ -40,6 +34,10 @@ exports.deleteUser = async (req,res,next)=>{
     try {
         await User.destroy({
             where:{id:req.params.userid}
+        })
+        res.json({
+            code:200,
+            message:'삭제가 완료되었습니다'
         })
     } catch (err) {
         console.error(err);
