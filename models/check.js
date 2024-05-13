@@ -3,10 +3,6 @@ const Sequelize= require("sequelize");
 class Check extends Sequelize.Model{
     static initiate(sequelize){
         Check.init({
-            id:{
-                type:Sequelize.INTEGER,
-                primaryKey:true,
-            },
             img:{
                 type:Sequelize.STRING(255),
                 allowNull:false,

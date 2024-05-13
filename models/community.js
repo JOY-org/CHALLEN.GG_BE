@@ -3,11 +3,6 @@ const Sequelize = require('sequelize');
 class Community extends Sequelize.Model{
     static initiate(sequelize){
         Community.init({
-            id:{
-                type: Sequelize.INTEGER,
-                allowNull:false,
-                primaryKey:true,
-            },
             name:{
                 type:Sequelize.STRING(50),
                 allowNull:false,

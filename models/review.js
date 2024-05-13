@@ -3,10 +3,6 @@ const Sequelize= require("sequelize");
 class Review extends Sequelize.Model{
     static initiate(sequelize){
         Review.init({
-            id:{
-                type:Sequelize.INTEGER,
-                primaryKey:true,
-            },
             title:{
                 type:Sequelize.STRING(25),
                 allowNull:false

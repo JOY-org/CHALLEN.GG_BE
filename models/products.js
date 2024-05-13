@@ -3,13 +3,10 @@ const Sequelize= require('sequelize')
 class Products extends Sequelize.Model{
     static initiate(sequelize){
         Products.init({
-            id:{
-                type:Sequelize.INTEGER,
-                primaryKey:true
-            },
             img:{
                 type:Sequelize.STRING(200),
-                allowNull:false
+                allowNull:false,
+                defaultValue:"이미지 주소",
             },
             name:{
                 type:Sequelize.STRING(20),
@@ -21,7 +18,8 @@ class Products extends Sequelize.Model{
             },
             price:{
                 type:Sequelize.INTEGER,
-                allowNull:false
+                allowNull:false,
+                defaultValue:1000,
             },
             counts:{
                 type:Sequelize.INTEGER,
@@ -30,7 +28,8 @@ class Products extends Sequelize.Model{
             },
             description:{
                 type:Sequelize.TEXT,
-                allowNull:false
+                allowNull:false,
+                defaultValue:"물품 설명"
             }
         },{
             timestamps:false,
