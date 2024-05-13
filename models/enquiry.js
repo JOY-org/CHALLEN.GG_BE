@@ -3,10 +3,6 @@ const Sequelize= require("sequelize");
 class Enquiry extends Sequelize.Model{
     static initiate(sequelize){
         Enquiry.init({
-            id:{
-                type:Sequelize.INTEGER,
-                primaryKey:true,
-            },
             title:{
                 type:Sequelize.STRING(25),
                 allowNull:false

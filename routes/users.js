@@ -3,7 +3,7 @@ const router = express.Router();
 const multer= require('multer');
 const path=require('path')
 // require('../controllers/user') 에서 필요한 거 가져와서 넣기
-const {getUser}=require('../controllers/user')
+const {getUser, deleteUser,modifyUser }=require('../controllers/user')
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -22,5 +22,7 @@ const imgupload=multer({
 }) // 프로필 사진 변경 할때 필요
 
 router.get('/', getUser)
+router.post('/:userid',modifyUser)
+router.delete('/:userid',deleteUser)
 
 module.exports = router;

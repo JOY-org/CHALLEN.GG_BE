@@ -3,11 +3,6 @@ const Sequelize = require('sequelize');
 class Posts extends Sequelize.Model{
     static initiate(sequelize){
         Posts.init({
-            id:{
-                type:Sequelize.INTEGER,
-                allowNull:false,
-                primaryKey:true
-            },
             img:{
                 type: Sequelize.STRING(225),
                 allowNull:false,
@@ -15,7 +10,11 @@ class Posts extends Sequelize.Model{
             content:{
                 type: Sequelize.TEXT,
                 allowNull:false
-            }   
+            },
+            title:{
+                type:Sequelize.STRING(30),
+                allowNull:false
+            }
         },{
             timestamps:true,
             sequelize,

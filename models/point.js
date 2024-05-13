@@ -3,10 +3,6 @@ const Sequelize = require('sequelize');
 class Point extends Sequelize.Model{
     static initiate(sequelize){
         Point.init({
-            id:{
-                type: Sequelize.INTEGER,
-                primaryKey:true,
-            },
             point:{
                 type:Sequelize.INTEGER,
                 allowNull:false,

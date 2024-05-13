@@ -3,10 +3,6 @@ const Sequelize= require("sequelize");
 class Purchased extends Sequelize.Model{
     static initiate(sequelize){
         Purchased.init({
-            id:{
-                type:Sequelize.INTEGER,
-                primaryKey:true,
-            },
             count:{
                 type: Sequelize.INTEGER,
                 allowNull:false,

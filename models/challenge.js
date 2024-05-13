@@ -3,11 +3,6 @@ const Sequelize= require("sequelize");
 class Challenge extends Sequelize.Model{
     static initiate(sequelize){
         Challenge.init({
-            id:{
-                type:Sequelize.INTEGER,
-                allowNull:false,
-                primaryKey:true
-            },
             name:{
                 type:Sequelize.STRING(50),
                 allowNull:false
