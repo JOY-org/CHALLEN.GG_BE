@@ -4,14 +4,30 @@ const GoogleStrategy = require('passport-google').Strategy;
 
 module.exports = () =>{
     passport.use(new GoogleStrategy({
-        clientID: GOOGLE_CLIENT_ID,
-        clientSecret: GOOGLE_CLIENT_SECRET,
-        callbackURL: "http://www.example.com/auth/google/callback"
-    },
-        function(accessToken, refreshToken, profile, cb) {
-            User.findOrCreate({ googleId: profile.id }, function (err, user) {
-            return cb(err, user);
+        clientID: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL: "/v1/auth/kakao/callback"
+    }, async(accessToken, refreshToken, profile, done) => {
+        try{
+            const exUser = await User.findOne({
+                where:{ //googleId 칸이 없지만 일단 비슷하게 만들어 두었다. 
+                    googleId:profile.id,
+                    provider:'google'
+                }
             });
+            if (exUser){
+                done(null,exUser);
+            } else{
+                const newUser = await User.create({
+                    nickname : profile.displayName, //google이 제공하는게 맞나 확인해봐야 한다.
+                    googleId: profile.id, // 지금 우리 데이터 베이스에는 google id 라는 데이터 열이 없다. 만들어봐야하는지 확인해 봐야한다.
+                    provider:'google'
+                });
+                done(null, newUser)
+            }
+        }catch(err){
+            console.error(err);
+            document(err);
         }
-    ));
+    }));
 }
