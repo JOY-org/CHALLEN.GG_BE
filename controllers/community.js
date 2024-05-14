@@ -19,11 +19,7 @@ exports.getCommunity = async(req,res,next)=>{
 
 exports.uploadCommunity = async(req,res,next)=>{
     try{
-        const review = await Community.create({
-            name : req.body.name,
-            img : req.body.img,
-            comment:req.user.comment,
-        })
+        const review = await Community.create(req.body)
     }catch(err){
         console.error(err);
         next(err)
@@ -32,14 +28,7 @@ exports.uploadCommunity = async(req,res,next)=>{
 
 exports.modifyCommunity = async (req, res, next) => {
     try {
-        await Community.update({
-            name: req.body.name,
-            img: req.body.img,
-            comment: req.body.comment
-        },{
-            where: { id : req.community.id }
-        });
-
+        await Community.update(req.body,{where: { id : req.community.id }})
         res.json({
             code: 200,
             message: '커뮤니티 수정 완료'
