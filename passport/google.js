@@ -11,7 +11,7 @@ module.exports = () =>{
         try{
             const exUser = await User.findOne({
                 where:{ //googleId 칸이 없지만 일단 비슷하게 만들어 두었다. 
-                    googleId:profile.id,
+                    googleId:profile.id, //구글에서 제공하는것과 비교해서 찾아보아야 한다.
                     provider:'google'
                 }
             });
