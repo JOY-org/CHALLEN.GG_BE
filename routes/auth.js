@@ -15,6 +15,6 @@ const router = express.Router();
 
 // /v1/auth/google
 router.get('/google',passport.authenticate('google'))
-router.get('/auth/kakao/callback', googleLogin);
+router.get('/auth/google/callback', googleLogin);
 
 module.exports=router;

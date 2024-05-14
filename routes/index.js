@@ -12,7 +12,7 @@ const { dummyInput } = require('../controllers/dummy');
 // const { verifyToken } = require("../middlewares");
 // const passport = require('passport');
 
-router.get('/auth', authRouter)
+router.get('/auth', authRouter)//로그인 
 
 // /v1/users
 router.use('/users', userRouter);
