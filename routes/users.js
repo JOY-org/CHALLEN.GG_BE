@@ -22,6 +22,8 @@ const imgupload=multer({
     limits
 }) // 프로필 사진 변경 할때 필요
 
+
+// User을 조회하고 수정하고 삭제 하는 부분 -> 미들웨어를 이용하여 변경해야 하는 부분이 있다.
 router.get('/', getUser)
 router.patch('/',modifyUser)
 router.delete('/:userid',deleteUser)
