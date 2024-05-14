@@ -23,9 +23,9 @@ try{
 }
 
 // passport
-// const passport = require('passport'); // 패스포트 모듈
-// const passportConfig = require('./passport'); // 패스포트 설정 (자체)
-// passportConfig();
+const passport = require('passport'); // 패스포트 모듈
+const passportConfig = require('./passport'); // 패스포트 설정 (자체)
+passportConfig();
 
 const apiRouter = require('./routes'); // 라우터 경로 설정 (자체)
 const { sequelize } = require('./models'); // 시퀄라이즈 모델 설정
@@ -58,8 +58,8 @@ app.use(
         },
     }),
     // passport
-    // passport.initialize(),
-    // passport.session(),
+    passport.initialize(), // 여기 아래 2개가 로그인에 필요한것
+    passport.session(),
 );
 
 // router

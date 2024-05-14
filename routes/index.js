@@ -6,20 +6,13 @@ const userRouter = require('./users');
 const challengeRouter = require('./challenge')
 const communityRouter = require('./community')
 const productRouter= require('./product')
+const authRouter = require('./auth')
 const { dummyInput } = require('../controllers/dummy');
 // const { createToken, join, refreshToken, kakaoLogin } = require('../controllers/auth');
 // const { verifyToken } = require("../middlewares");
 // const passport = require('passport');
 
-// // POST /v1/auth/join
-// router.post('/auth/join', join);
-
-// // POST /v1/auth/login
-// router.post('/auth/login', createToken);
-
-// router.get('/auth/kakao', passport.authenticate('kakao'));
-// router.get('/auth/kakao/callback', kakaoLogin);
-// router.post('/auth/refresh', refreshToken);
+router.get('/auth', authRouter)
 
 // /v1/users
 router.use('/users', userRouter);
