@@ -2,10 +2,10 @@ const {User, Product, Cart} = require('../models');
 const op = require('sequelize').Op;
 
 
-exports.getCart =async(req,res,next)=>{
+exports.getCart = async(req,res,next)=>{
     try{
         const cart= await Cart.findAll({
-            where:{id:req.params.id}
+            where:{id:req.params.userid}
         });
         res.json(cart)
     }catch(err){
@@ -14,7 +14,7 @@ exports.getCart =async(req,res,next)=>{
     }
 }
 
-exports.modifyCart= async(req,res,next)=>{ // 변경될만한 거는 삭제를 제외한다면 상품 개수 뿐이다.
+exports.modifyCart = async(req,res,next)=>{ // 변경될만한 거는 삭제를 제외한다면 상품 개수 뿐이다.
     try{
         await Cart.update({
             count:req.body.count //프론트에서 상품 개수가 더하고나 빼지면 요청을 보내고 바뀌어야 한다.
@@ -33,7 +33,7 @@ exports.modifyCart= async(req,res,next)=>{ // 변경될만한 거는 삭제를 �
 exports.deleteCart = async(req,res,next)=>{
     try{
         await Cart.destroy({
-            where:{id: req.params.id}
+            where:{id: req.params.productid}
         })
         res.jsont({
             code:200,
