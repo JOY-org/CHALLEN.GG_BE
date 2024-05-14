@@ -1,15 +1,20 @@
-const {Community} = require('../models');
+const {User, Posts} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
-exports.getCommunity = async(req,res,next)=>{
+exports.getPosts = async(req,res,next)=>{
     try {
-        const community = await Community.findAll({
+        const posts = await Posts.findAll({
             order:[['createdAt','DESC']]
         })
+        // if (posts){
+        //     const post = await User.getPosts({
+        //         attributes: [nickname]
+        //     });
+        // }
         res.json({
             code:200,
-            payload: community
+            payload: posts
         })
     } catch (err) {
         console.error(err);
@@ -17,12 +22,13 @@ exports.getCommunity = async(req,res,next)=>{
     }
 }
 
-exports.uploadCommunity = async(req,res,next)=>{
+exports.uploadPosts = async(req,res,next)=>{
     try{
         const review = await Community.create({
-            name : req.body.name,
+            title : req.body.title,
             img : req.body.img,
-            comment:req.user.comment,
+            content : req.body.content,
+            // userId: req.user.id, // 여기 user는 어디서 오는 건지 모르겠음
         })
     }catch(err){
         console.error(err);
@@ -30,19 +36,19 @@ exports.uploadCommunity = async(req,res,next)=>{
     }
 }
 
-exports.modifyCommunity = async (req, res, next) => {
+exports.modifyPosts = async (req, res, next) => {
     try {
-        await Community.update({
-            name: req.body.name,
+        await Posts.update({
+            title: req.body.title,
             img: req.body.img,
-            comment: req.body.comment
+            content: req.body.content,
         },{
             where: { id : req.community.id }
         });
 
         res.json({
             code: 200,
-            message: '커뮤니티 수정 완료'
+            message: '게시글 수정 완료'
         });
     } catch (err) {
         console.error(err);
@@ -50,14 +56,14 @@ exports.modifyCommunity = async (req, res, next) => {
     }
 }
 
-exports.deleteCommunity = async(req,res,next)=>{
+exports.deletePosts = async(req,res,next)=>{
     try{
-        await Community.destroy({
+        await Posts.destroy({
             where:{id: req.params.id}
         })
         res.json({
             code:200,
-            message:"커뮤니티가 완전! 사라졌어요!"
+            message:"게시글 삭제 완료"
         })
     }catch(err){
         console.error(err);
