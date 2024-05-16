@@ -4,7 +4,7 @@ const KakaoStrategy = require('passport-kakao').Strategy;
 
 module.exports = () =>{
     passport.use(new KakaoStrategy({
-        clientID: process.env.KAKAO_CLIENT_ID,
+        clientID: process.env.KAKAO_KEY,
         callbackURL: "/v1/auth/kakao/callback"
     }, async(accessToken, refreshToken, profile, done) => {
         try{

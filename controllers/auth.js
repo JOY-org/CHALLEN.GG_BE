@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const {User}= require ('../models;')
+const {User}= require ('../models')
 const passport = require('passport');
 
 // const jwt = require('jsonwebtoken');
@@ -23,6 +23,36 @@ exports.login = (req, res, next) => {
             return res.redirect('/');
         })
     })(req, res, next);
+}
+
+exports.join = async(req,res,next)=>{
+    console.log(req.body);
+    const { id,password,nickname}= req.body;
+    try {
+        const exId = await User.findOne({where:{id}});
+        if(exId){
+            throw new Error('이미 가입된 아이디 입니다.')
+        }
+        const exNickname = await User.findOne({where:{nickname}});
+        if(exNickname){
+            throw new Error('이미 존재하는 아이디 입니다.')
+        }
+        const hash =await bcrypt.hash(password,10) //암호화를 10번 정도 돌리자
+        await User.create({
+            id,
+            nickname,
+            password:hash,
+            provider:"local"
+        });
+        res.json({
+            code:200,
+            message:"회원가입이 완료되었습니다."
+        })
+    } catch (err) {
+        console.error(err);
+        next(err)
+    }
+}
 
 const jwt = require('jsonwebtoken');
 
@@ -141,4 +171,4 @@ exports.kakaoLogin = async(req, res, next)=>{
     } catch(err){
         return next(err);
     }
-}
+}// 카카오 로그인
