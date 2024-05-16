@@ -1,5 +1,5 @@
 const express = require('express');
-const { googleLogin, kakaoLogin } = require('../controllers/auth');
+const { googleLogin, kakaoLogin,join } = require('../controllers/auth');
 const router = express.Router();
 const passport = require('passport')
 // router.get('/auth/kakao', passport.authenticate('kakao'));
@@ -7,9 +7,9 @@ const passport = require('passport')
 // router.post('/auth/refresh', refreshToken);
 
 
-// // POST /v1/auth/join
-// router.post('/auth/join', join);
-// -> 여기 이부분은 회원가입 부분이다.
+// POST /v1/auth/join  회원가입하는 부분
+router.post('/join', join);
+
 // // POST /v1/auth/login
 // router.post('/auth/login', createToken);
 
