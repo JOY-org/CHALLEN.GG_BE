@@ -1,9 +1,11 @@
 const passport = require('passport')
 const {User} = require('../models')
 const kakao = require('./kakao')
-const google = require('./google')
+const local = require('./local');
+const google = require('./google');
 
 module.exports =()=> {
+    local();
     google();
     kakaoLogin();
     
