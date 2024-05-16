@@ -1,7 +1,7 @@
 const express = require('express');
 const { googleLogin, kakaoLogin } = require('../controllers/auth');
 const router = express.Router();
-
+const passport = require('passport')
 // router.get('/auth/kakao', passport.authenticate('kakao'));
 // router.get('/auth/kakao/callback', kakaoLogin);
 // router.post('/auth/refresh', refreshToken);
