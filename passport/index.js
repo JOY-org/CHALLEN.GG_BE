@@ -7,7 +7,7 @@ const google = require('./google');
 module.exports =()=> {
     local();
     google();
-    kakaoLogin();
+    kakao();
     
     
     passport.serializeUser((user,done)=>{
