@@ -21,7 +21,6 @@
     "mysql2": "^3.9.7",
     "nunjucks": "^3.2.4",
     "passport": "^0.7.0",
-    "passport-google": "^0.3.0",
     "passport-google-oauth20": "^2.0.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",

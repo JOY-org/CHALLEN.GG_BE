@@ -1,13 +1,15 @@
-const passport = require('passport');
-const {User} = require('../models');
-
+const passport = require('passport')
+const {User} = require('../models')
+const kakao = require('./kakao')
 const local = require('./local');
 const google = require('./google');
 
 module.exports =()=> {
     local();
     google();
-
+    kakaoLogin();
+    
+    
     passport.serializeUser((user,done)=>{
         done(null,user.id);
     }) // 위에 google과 kakao가 성공한다면 여기를 거치게 된다,
