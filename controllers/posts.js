@@ -59,7 +59,7 @@ exports.modifyPosts = async (req, res, next) => {
 exports.deletePosts = async(req,res,next)=>{
     try{
         await Posts.destroy({
-            where:{id: req.params.id}
+            where:{id: req.params.postid}
         })
         res.json({
             code:200,

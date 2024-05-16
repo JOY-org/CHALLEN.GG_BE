@@ -42,7 +42,7 @@ exports.modifyCommunity = async (req, res, next) => {
 exports.deleteCommunity = async(req,res,next)=>{
     try{
         await Community.destroy({
-            where:{id: req.params.id}
+            where:{id: req.params.communityid}
         })
         res.json({
             code:200,

@@ -25,13 +25,13 @@ const imgupload=multer({
 router.get('/', getCommunity);
 router.post('/', uploadCommunity);
 router.patch('/',modifyCommunity);
-router.delete('/:id',deleteCommunity);
+router.delete('/:communityid',deleteCommunity);
 
 // community/posts/ -> 
 router.get('/post', getPosts);
 router.post('/post', uploadPosts);
-router.put('/post', getPosts); // put/patch 뭘 사용하는 게 좋을까요
-router.delete('/post/:id', getPosts);
+router.patch('/post', modifyPosts);
+router.delete('/post/:postid', deletePosts);
 
 
 module.exports = router;
