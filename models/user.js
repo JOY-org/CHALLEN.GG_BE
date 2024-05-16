@@ -3,6 +3,14 @@ const Sequelize= require('sequelize')
 class User extends Sequelize.Model{
     static initiate(sequelize){
         User.init({
+            id:{
+                type: Sequelize.STRING(255),
+                primaryKey:true,
+            },
+            password:{
+                type: Sequelize.STRING(20),
+                allowNull:false,
+            },
             nickname: {
                 type: Sequelize.STRING(15),
                 allowNull: false,
@@ -20,7 +28,16 @@ class User extends Sequelize.Model{
             exp:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
+                defaultValue:0
             },
+            kakaoid:{
+                type:Sequelize.STRING(30),
+                allowNull:true,
+            },
+            googleid:{
+                type:Sequelize.STRING(30),
+                allowNull:true,
+            }
         },{
             timestamps:true,// createdAt, updatedAt 이것을 false 라고 하면 안뜹니다. 
             sequelize,
