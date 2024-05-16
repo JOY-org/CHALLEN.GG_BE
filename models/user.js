@@ -28,6 +28,7 @@ class User extends Sequelize.Model{
             exp:{
                 type:Sequelize.INTEGER,
                 allowNull:false,
+                defaultValue:0
             },
             kakaoid:{
                 type:Sequelize.STRING(30),

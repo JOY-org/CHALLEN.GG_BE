@@ -1,5 +1,5 @@
 const express = require('express');
-const { googleLogin } = require('../controllers/auth');
+const { googleLogin, kakaoLogin } = require('../controllers/auth');
 const router = express.Router();
 
 // router.get('/auth/kakao', passport.authenticate('kakao'));
@@ -15,6 +15,10 @@ const router = express.Router();
 
 // /v1/auth/google
 router.get('/google',passport.authenticate('google'))
-router.get('/auth/google/callback', googleLogin);
+router.get('/google/callback', googleLogin);
+
+// /v1/auth/kakao
+router.get('/kakao',passport.authenticate('kakao'))
+router.get('/kakao/callback', kakaoLogin);
 
 module.exports=router;
