@@ -18,7 +18,8 @@ class User extends Sequelize.Model{
             },
             provider:{
                 type:Sequelize.BOOLEAN,
-                allowNull:false,
+                allowNull:true,
+                defaultValue:'local'
             },
             img:{
                 type:Sequelize.STRING(200),

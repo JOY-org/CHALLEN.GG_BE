@@ -8,7 +8,7 @@ module.exports = () => {
         usernameField: 'id',
         passwordField: 'password',
         passReqToCallback: false
-    }, async (email, password, done) => {
+    }, async (id, password, done) => {
         try {
             const exUser = await User.findOne({where : { id }});
             if (exUser) {

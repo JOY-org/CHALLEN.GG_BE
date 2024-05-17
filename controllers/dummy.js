@@ -2,8 +2,8 @@ const {User, Products, Cart} = require('../models');
 
 exports.dummyInput = async (req, res, next)=>{
     const user_dummy = [
-        {"nickname": "kwj","provider": true, "exp": 0},
-        {"nickname": "psw","provider": true, "exp": 0}
+        {"id":"kwj","password":123,"nickname": "kwj"},
+        {"id":"pse","password":123,"nickname": "psw"}
     ]
 
     const prod_dummy = [

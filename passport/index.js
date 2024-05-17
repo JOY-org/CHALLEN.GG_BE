@@ -9,7 +9,6 @@ module.exports =()=> {
     google();
     kakao();
     
-    
     passport.serializeUser((user,done)=>{
         done(null,user.id);
     }) // 위에 google과 kakao가 성공한다면 여기를 거치게 된다,
