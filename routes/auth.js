@@ -10,8 +10,8 @@ const passport = require('passport')
 router.post('/join', join);
 
 // // POST /v1/auth/login
-router.post('/auth/login', createToken);
-router.post('/auth/refresh', refreshToken);
+router.post('/login', createToken);
+router.post('/refresh', refreshToken);
 
 // /v1/auth/google
 router.get('/google',passport.authenticate('google'))

@@ -56,7 +56,7 @@ exports.createToken = (req, res, next) => {
 
 exports.join = async(req,res,next)=>{
     console.log(req.body);
-    const { id,password,nickname}= req.body;
+    const { id,password,nickname}= req.body; //password가 숫자 X 문자열 이여야 한다.
     try {
         const exId = await User.findOne({where:{id}});
         if(exId){
@@ -70,8 +70,7 @@ exports.join = async(req,res,next)=>{
         await User.create({
             id,
             nickname,
-            password:hash,
-            provider:"local"
+            password:hash 
         });
         res.json({
             code:200,
