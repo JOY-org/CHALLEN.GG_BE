@@ -13,7 +13,6 @@ exports.createToken = (req, res, next) => {
                 throw new Error(info.message);
             }
             return req.login(user, (err) => {
-
                 // token access
                 const accessToken = jwt.sign(
                     {
@@ -64,7 +63,7 @@ exports.join = async(req,res,next)=>{
         }
         const exNickname = await User.findOne({where:{nickname}});
         if(exNickname){
-            throw new Error('이미 존재하는 아이디 입니다.')
+            throw new Error('이미 존재하는 닉네임 입니다.')
         }
         const hash =await bcrypt.hash(password,10) //암호화를 10번 정도 돌리자
         await User.create({
