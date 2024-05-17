@@ -3,6 +3,7 @@ const router = express.Router();
 const multer= require('multer');
 const path=require('path');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
+const { verifyToken } = require("../middlewares");
 const {getCommunity, uploadCommunity, deleteCommunity, modifyCommunity }=require('../controllers/community');
 const {getPosts, uploadPosts, deletePosts, modifyPosts }=require('../controllers/posts');
 
@@ -23,15 +24,15 @@ const imgupload=multer({
 }) // 커뮤니티 대표사진
 
 router.get('/', getCommunity);
-router.post('/', uploadCommunity);
-router.patch('/',modifyCommunity);
-router.delete('/:id',deleteCommunity);
+router.post('/', verifyToken, uploadCommunity);
+router.patch('/', verifyToken, modifyCommunity);
+router.delete('/:id', verifyToken, deleteCommunity);
 
 // community/posts/ -> 
 router.get('/post', getPosts);
-router.post('/post', uploadPosts);
-router.put('/post', getPosts); // put/patch 뭘 사용하는 게 좋을까요
-router.delete('/post/:id', getPosts);
+router.post('/post', verifyToken, uploadPosts);
+router.put('/post', verifyToken, getPosts); // put/patch 뭘 사용하는 게 좋을까요
+router.delete('/post/:id', verifyToken, getPosts);
 
 
 module.exports = router;

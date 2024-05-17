@@ -17,9 +17,6 @@ router.get('/auth', authRouter)//로그인
 // /v1/users
 router.use('/users', userRouter);
 
-// // /v1/posts
-// router.use('/posts', postRouter);
-
 // /v1/challenge
 router.use('/challenge', challengeRouter);
 
