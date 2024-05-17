@@ -83,7 +83,6 @@ exports.join = async(req,res,next)=>{
     }
 }
 
-const jwt = require('jsonwebtoken');
 
 exports.refreshToken = async(req,res,next) =>{
     try{

@@ -17,7 +17,7 @@ class User extends Sequelize.Model{
                 unique:true,
             },
             provider:{
-                type:Sequelize.BOOLEAN,
+                type:Sequelize.STRING(10),
                 allowNull:true,
                 defaultValue:'local'
             },

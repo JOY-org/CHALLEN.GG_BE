@@ -1,10 +1,9 @@
 const express = require('express');
-const { createToken, googleLogin, kakaoLogin,join } = require('../controllers/auth');
+const { createToken, googleLogin, kakaoLogin,join, refreshToken } = require('../controllers/auth');
 const router = express.Router();
 const passport = require('passport')
-// router.get('/auth/kakao', passport.authenticate('kakao'));
-// router.get('/auth/kakao/callback', kakaoLogin);
-// router.post('/auth/refresh', refreshToken);
+
+
 
 
 // POST /v1/auth/join  회원가입하는 부분
