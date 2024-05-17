@@ -17,7 +17,7 @@ exports.verifyToken = (req, res, next) => {
                 err.status = 401;
                 return next(err);
             }
-            req.user = user;
+            req.user = user; //토큰으로 가져온 user
             return next();
         })(req, res, next);
     } catch (err) {

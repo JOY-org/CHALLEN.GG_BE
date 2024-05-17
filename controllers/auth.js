@@ -38,11 +38,11 @@ exports.createToken = (req, res, next) => {
                     console.error(err);
                     return next(err);
                 }
-
                 res.json({
                     code:200,
                     message: '토근 발급 완료',
                     accessToken,
+                    refreshToken,
                     userid: user.id
                 });
             })

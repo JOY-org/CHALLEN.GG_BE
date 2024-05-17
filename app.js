@@ -75,9 +75,9 @@ app.use((req, res, next) => {
 // 서버 에러 관리
 app.use((err, req, res, next) => {
     console.error(err);
-    res.locals.message = err.message;
-    res.locals.error = process.env.NODE_ENV !== 'production' ? err : {}; // 베껴온 코드, 이해 필요
-    res.status(err.status).json({
+    // res.locals.message = err.message;
+    // res.locals.error = process.env.NODE_ENV !== 'production' ? err : {}; // 베껴온 코드, 이해 필요
+    res.status(err.status || 500 ).json({
         code: err.status || 500,
         message: err.message || '서버 에러 발생'
     });

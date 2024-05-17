@@ -24,11 +24,16 @@ exports.getPosts = async(req,res,next)=>{
 
 exports.uploadPosts = async(req,res,next)=>{
     try{
-        const review = await Community.create({
+        const post = await Community.create({
             title : req.body.title,
             img : req.body.img,
             content : req.body.content,
-            // userId: req.user.id, // 여기 user는 어디서 오는 건지 모르겠음
+            userId: req.user.id,
+        })
+        res.json({
+            code:200,
+            payload : post,
+            message:"업로드를 완료 했습니다."
         })
     }catch(err){
         console.error(err);
@@ -43,7 +48,7 @@ exports.modifyPosts = async (req, res, next) => {
             img: req.body.img,
             content: req.body.content,
         },{
-            where: { id : req.community.id }
+            where: { id : req.params.postid}
         });
 
         res.json({
@@ -59,7 +64,7 @@ exports.modifyPosts = async (req, res, next) => {
 exports.deletePosts = async(req,res,next)=>{
     try{
         await Posts.destroy({
-            where:{id: req.params.id}
+            where:{id: req.params.postid}
         })
         res.json({
             code:200,

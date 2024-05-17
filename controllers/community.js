@@ -28,7 +28,7 @@ exports.uploadCommunity = async(req,res,next)=>{
 
 exports.modifyCommunity = async (req, res, next) => {
     try {
-        await Community.update(req.body,{where: { id : req.community.id }})
+        await Community.update(req.body,{where: { id : req.params.communityid}})
         res.json({
             code: 200,
             message: '커뮤니티 수정 완료'
@@ -42,7 +42,7 @@ exports.modifyCommunity = async (req, res, next) => {
 exports.deleteCommunity = async(req,res,next)=>{
     try{
         await Community.destroy({
-            where:{id: req.params.id}
+            where:{id: req.params.communityid}
         })
         res.json({
             code:200,

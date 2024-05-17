@@ -23,16 +23,18 @@ const imgupload=multer({
     limits
 }) // 커뮤니티 대표사진
 
+//verify를 넣어서 수정과 삭제가 가능하게 해야하나? -> 프론트에서 가능한 것인가?
+//커뮤니티 관련
 router.get('/', getCommunity);
-router.post('/', verifyToken, uploadCommunity);
-router.patch('/', verifyToken, modifyCommunity);
-router.delete('/:id', verifyToken, deleteCommunity);
+router.post('/', verifyToken, uploadCommunity); //미완성
+router.patch('/:communityid', modifyCommunity);
+router.delete('/:communityid',deleteCommunity);
 
-// community/posts/ -> 
+// 게시물 관련
 router.get('/post', getPosts);
-router.post('/post', verifyToken, uploadPosts);
-router.put('/post', verifyToken, getPosts); // put/patch 뭘 사용하는 게 좋을까요
-router.delete('/post/:id', verifyToken, getPosts);
+router.post('/post', verifyToken, uploadPosts); // 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
+router.patch('/post/:postid', modifyPosts); 
+router.delete('/post/:postid', getPosts);
 
 
 module.exports = router;
