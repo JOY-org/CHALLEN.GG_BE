@@ -1,10 +1,8 @@
 require('dotenv').config(); // .env 파일 읽어서 process.env에 추가
 const express = require('express'); // express 모듈
-// const cookieParser = require('cookie-parser'); // cookie-parser
 const morgan = require('morgan'); // morgan(로그) 모듈
 const path = require('path'); // 경로 설정 모듈
 const session = require('express-session'); // 세션 모듈
-// const nunjucks = require('nunjucks'); // numjucks, 일단 넣어는 뒀습니다
 
 // cors
 const cors = require('cors'); // cors 모듈, 다른 출처의 resource 를 공유
@@ -84,7 +82,6 @@ app.use((err, req, res, next) => {
         message: err.message || '서버 에러 발생'
     });
 })
-
 
 app.listen(app.get('port'), ()=>{
     console.log(`${app.get('port')}번 포트에서 서버 실행`);
