@@ -1,5 +1,5 @@
 const express = require('express');
-const { googleLogin, kakaoLogin,join } = require('../controllers/auth');
+const { createToken, googleLogin, kakaoLogin,join } = require('../controllers/auth');
 const router = express.Router();
 const passport = require('passport')
 // router.get('/auth/kakao', passport.authenticate('kakao'));
@@ -11,14 +11,16 @@ const passport = require('passport')
 router.post('/join', join);
 
 // // POST /v1/auth/login
-// router.post('/auth/login', createToken);
+router.post('/auth/login', createToken);
 
 // /v1/auth/google
 router.get('/google',passport.authenticate('google'))
 router.get('/google/callback', googleLogin);
+router.post('/auth/refresh', refreshToken);
 
 // /v1/auth/kakao
 router.get('/kakao',passport.authenticate('kakao'))
 router.get('/kakao/callback', kakaoLogin);
+router.post('/auth/refresh', refreshToken);
 
 module.exports=router;

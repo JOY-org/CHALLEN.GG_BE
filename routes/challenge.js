@@ -4,6 +4,7 @@ const multer= require('multer');
 const path=require('path')
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 const {getChallenge, uploadChallenge, modifyChallenge, deleteChallenge}=require('../controllers/challenge');
+const { verifyToken } = require("../middlewares");
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -22,9 +23,9 @@ const imgupload=multer({
 }) // 챌린지 대표사진
 
 router.get('/', getChallenge);
-router.post('/', uploadChallenge);
-router.patch('/', modifyChallenge);
-router.delete('/:id', deleteChallenge);
+router.post('/', verifyToken, uploadChallenge);
+router.patch('/', verifyToken, modifyChallenge);
+router.delete('/:id', verifyToken, deleteChallenge);
 
 
 

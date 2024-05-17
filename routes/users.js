@@ -4,6 +4,7 @@ const multer= require('multer');
 const path=require('path')
 // require('../controllers/user') 에서 필요한 거 가져와서 넣기
 const {getUser, deleteUser,modifyUser }=require('../controllers/user');
+const { verifyToken } = require("../middlewares");
 const { verify } = require('crypto');
 
 const storage = multer.diskStorage({
@@ -25,7 +26,7 @@ const imgupload=multer({
 
 // User을 조회하고 수정하고 삭제 하는 부분 -> 미들웨어를 이용하여 변경해야 하는 부분이 있다.
 router.get('/', getUser)
-router.patch('/',modifyUser)
-router.delete('/:userid',deleteUser)
+router.patch('/', verifyToken, modifyUser)
+router.delete('/:userid', verifyToken, deleteUser)
 
 module.exports = router;

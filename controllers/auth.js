@@ -1,28 +1,57 @@
 const bcrypt = require('bcrypt');
 const {User}= require ('../models')
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
 
-// const jwt = require('jsonwebtoken');
-
-exports.login = (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        console.log('authenticate 완료', err, user, info);
-        if (err) {
-            console.error(err);
-            return next(err);
-        }
-        if (!user) {
-            throw new Error(info.message);
-        }
-        return req.login(user, (err) => {
-            console.log('login 실행', err);
+exports.createToken = (req, res, next) => {
+    try{
+        passport.authenticate('local', {session:false}, (err, user, info) => {
             if (err) {
                 console.error(err);
                 return next(err);
+            } else if (!user) {
+                throw new Error(info.message);
             }
-            return res.redirect('/');
-        })
-    })(req, res, next);
+            return req.login(user, (err) => {
+
+                // token access
+                const accessToken = jwt.sign(
+                    {
+                        id: user.id,
+                        nickname: user.nickname
+                    },
+                    process.env.JWT_SECRET,
+                    // 1시간 후엔 expire
+                    {expiresIn: '1h', issuer: 'multi_project', subject:'accessToken'}
+                );
+
+                // token refresh
+                const refreshToken = jwt.sign(
+                    {
+                        id: user.id,
+                        nickname: user.nickname
+                    },
+                    process.env.JWT_SECRET,
+                    {expiresIn: '7d', issuer: 'multi_project', subject:'accessToken'}
+                );
+                User.update({refreshToken}, {where: {di:user.id}});
+                if(err) {
+                    console.error(err);
+                    return next(err);
+                }
+
+                res.json({
+                    code:200,
+                    message: '토근 발급 완료',
+                    accessToken,
+                    userid: user.id
+                });
+            })
+        })(req, res, next);
+    } catch(err){
+        console.error(err);
+        next(err);
+    }
 }
 
 exports.join = async(req,res,next)=>{
