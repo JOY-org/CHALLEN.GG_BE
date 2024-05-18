@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const {User}= require ('../models')
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
+const {ExtractJwt} = require('passport-jwt')
 
 exports.createToken = (req, res, next) => {
     try{

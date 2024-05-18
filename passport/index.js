@@ -3,11 +3,13 @@ const {User} = require('../models')
 const kakao = require('./kakao')
 const local = require('./local');
 const google = require('./google');
+const jwt = require('./jwt')
 
 module.exports =()=> {
     local();
     google();
     kakao();
+    jwt();
     
     passport.serializeUser((user,done)=>{
         done(null,user.id);

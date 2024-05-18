@@ -26,7 +26,7 @@ const imgupload=multer({
 //verify를 넣어서 수정과 삭제가 가능하게 해야하나? -> 프론트에서 가능한 것인가?
 //커뮤니티 관련
 router.get('/', getCommunity);
-router.post('/', verifyToken, uploadCommunity); //미완성
+router.post('/', verifyToken, uploadCommunity); 
 router.patch('/:communityid', modifyCommunity);
 router.delete('/:communityid',deleteCommunity);
 // router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다

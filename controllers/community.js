@@ -26,7 +26,8 @@ exports.uploadCommunity = async(req,res,next)=>{
         })
         res.json({
             code:200,
-            payload:community
+            payload:community,
+            UserId:req.user.id
         })
     }catch(err){
         console.error(err);

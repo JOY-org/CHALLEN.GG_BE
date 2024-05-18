@@ -6,6 +6,7 @@ class Posts extends Sequelize.Model{
             img:{
                 type: Sequelize.STRING(225),
                 allowNull:false,
+                defaultValue:"이미지 경로"
             },
             content:{
                 type: Sequelize.TEXT,

@@ -1,4 +1,4 @@
-const {User, Post} = require('../models');
+const { Post} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
@@ -25,15 +25,15 @@ exports.getPost = async(req,res,next)=>{
 exports.uploadPost = async(req,res,next)=>{
     try{
         const post = await Post.create({
-            title : req.body.title,
-            img : req.body.img,
-            content : req.body.content,
-            userId: req.user.id,
+            title :req.body.title,
+            content:req.body.content,
+            UserId: req.user.id,
         })
         res.json({
             code:200,
             payload : post,
-            message:"업로드를 완료 했습니다."
+            message:"업로드를 완료 했습니다.",
+            UserId:req.user.id,
         })
     }catch(err){
         console.error(err);
