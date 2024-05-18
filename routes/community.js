@@ -29,12 +29,13 @@ router.get('/', getCommunity);
 router.post('/', verifyToken, uploadCommunity); //미완성
 router.patch('/:communityid', modifyCommunity);
 router.delete('/:communityid',deleteCommunity);
+// router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다
 
 // 게시물 관련
 router.get('/post', getPost);
 router.post('/post', verifyToken, uploadPost); // 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
 router.patch('/post/:postid', modifyPost); 
 router.delete('/post/:postid', deletePost);
-
+// router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다
 
 module.exports = router;

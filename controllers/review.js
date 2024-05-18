@@ -32,6 +32,10 @@ exports.uploadReview = async(req,res,next)=>{
             content : req.body.content,
             UserId:req.user.id,
         })
+        res.json({
+            code:200,
+            payload:review
+        })
     }catch(err){
         console.error(err);
         next(err)

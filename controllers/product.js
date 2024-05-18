@@ -14,6 +14,15 @@ exports.getProduct=async(req,res,next)=>{
     }
 }
 
+exports.uploadProduct=async(req,res,next)=>{
+    try {
+        
+    } catch (err) {
+        console.error(err);
+        next(err)
+    }
+}
+
 exports.modifyProduct = async(req,res,next)=>{
     try {
         await Product.update(req.body, {where: {id: req.body.id}})

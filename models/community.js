@@ -10,7 +10,8 @@ class Community extends Sequelize.Model{
             },
             img:{
                 type:Sequelize.STRING(50),
-                allowNull:false,
+                allowNull:true,
+                defaultValue:"이미지경로"
             },
             comment:{
                 type:Sequelize.TEXT,

@@ -5,7 +5,8 @@ class Check extends Sequelize.Model{
         Check.init({
             img:{
                 type:Sequelize.STRING(255),
-                allowNull:false,
+                allowNull:true,
+                defaultValue:"이미지경로"
             },
         },{
             timestamps:true,

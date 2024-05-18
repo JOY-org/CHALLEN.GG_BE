@@ -6,15 +6,17 @@ const { verifyToken } = require("../middlewares");
 const {getReview, modifyReview, deleteReview,uploadReview} =require('../controllers/review');
 const {getCart, modifyCart, deleteCart}=require('../controllers/cart')
 const { getEnquiry, uploadEnquiry, modifyEnquiry, deleteEnquiry } =require('../controllers/enquiry');
-const { getProduct,deleteProduct, modifyProduct } = require('../controllers/product');
+const { getProduct,deleteProduct, modifyProduct, uploadProduct } = require('../controllers/product');
 const { getPurchased, deletePurchased,createPurchased } = require('../controllers/purchased');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 //put과 post에 차이가 있나?
 
 //상품을 조회하고, 수정하고, 삭제하는 기능 -> 이것도 미들웨어를 사용하여 변경해야한다.
 router.get('/',getProduct);
+router.post('/',uploadProduct) //미완성
 router.patch("/", verifyToken, modifyProduct);
 router.delete('/:productid',verifyToken, deleteProduct);
+// router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다
 
 // /products/cart/:id -> cart에서 다시 뿌려줄때 id가??? 
 router.get('/cart', verifyToken, getCart)
