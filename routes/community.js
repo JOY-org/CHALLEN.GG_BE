@@ -5,7 +5,7 @@ const path=require('path');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 const { verifyToken } = require("../middlewares");
 const {getCommunity, uploadCommunity, deleteCommunity, modifyCommunity }=require('../controllers/community');
-const {getPosts, uploadPosts, deletePosts, modifyPosts }=require('../controllers/posts');
+const {getPost, uploadPost, deletePost, modifyPost }=require('../controllers/posts');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -31,10 +31,10 @@ router.patch('/:communityid', modifyCommunity);
 router.delete('/:communityid',deleteCommunity);
 
 // 게시물 관련
-router.get('/post', getPosts);
-router.post('/post', verifyToken, uploadPosts); // 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
-router.patch('/post/:postid', modifyPosts); 
-router.delete('/post/:postid', getPosts);
+router.get('/post', getPost);
+router.post('/post', verifyToken, uploadPost); // 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
+router.patch('/post/:postid', modifyPost); 
+router.delete('/post/:postid', deletePost);
 
 
 module.exports = router;

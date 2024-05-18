@@ -65,6 +65,7 @@ class User extends Sequelize.Model{
         db.User.hasMany(db.Posts);
         db.User.hasMany(db.Success);
         db.User.hasMany(db.Check);
+        db.User.hasMany(db.Notification)
     }
 }
 

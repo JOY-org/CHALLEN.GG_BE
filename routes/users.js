@@ -6,6 +6,7 @@ const path=require('path')
 const {getUser, deleteUser,modifyUser }=require('../controllers/user');
 const { verifyToken } = require("../middlewares");
 const { verify } = require('crypto');
+const { getNotification, modifyNotification, deleteNotification } = require('../controllers/notification');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -23,10 +24,17 @@ const imgupload=multer({
     limits
 }) // 프로필 사진 변경 할때 필요
 
+//여기에 포인트, 개인정보 수정, 알림, 팔로잉,팔로우 필요  
+// /user 아래로 들어오면 여기로 통한다
 
 // User을 조회하고 수정하고 삭제 하는 부분 -> 미들웨어를 이용하여 변경해야 하는 부분이 있다.
 router.get('/', getUser)
 router.patch('/', verifyToken, modifyUser)
 router.delete('/', verifyToken, deleteUser)
+
+//알림
+router.get('/notification',verifyToken, getNotification) //미완성
+router.patch('/notification',verifyToken, modifyNotification) //미완성
+router.delete('/notification',verifyToken, deleteNotification) //미완성
 
 module.exports = router;

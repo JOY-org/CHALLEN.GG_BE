@@ -1,8 +1,8 @@
 const Sequelize= require('sequelize')
 
-class Products extends Sequelize.Model{
+class Product extends Sequelize.Model{
     static initiate(sequelize){
-        Products.init({
+        Product.init({
             img:{
                 type:Sequelize.STRING(200),
                 allowNull:false,
@@ -48,4 +48,4 @@ class Products extends Sequelize.Model{
     }
 }
 
-module.exports = Products;
+module.exports = Product;

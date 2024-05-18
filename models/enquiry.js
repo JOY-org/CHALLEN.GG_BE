@@ -17,7 +17,7 @@ class Enquiry extends Sequelize.Model{
     static associate(db){
         //관계들어갈 곳
         db.Enquiry.belongsTo(db.User);
-        db.Enquiry.belongsTo(db.Products);
+        db.Enquiry.belongsTo(db.Product);
     }
 }
 
