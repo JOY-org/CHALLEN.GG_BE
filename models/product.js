@@ -15,6 +15,7 @@ class Product extends Sequelize.Model{
             brand:{
                 type:Sequelize.STRING(20),
                 allowNull:true,
+                defaultValue:"X"
             },
             price:{
                 type:Sequelize.INTEGER,

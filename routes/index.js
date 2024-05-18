@@ -24,7 +24,7 @@ router.use('/challenge', challengeRouter);
 router.use('/community', communityRouter);
 
 // /v1/product
-router.use('/products',productRouter);
+router.use('/product',productRouter);
 
 router.get('/dummy', dummyInput)
 // 모두 같은 db를 쓰고 싶어서 -> dummy에 컨트롤러 dummy.js를 이용해서 모두가 /dummy 페이지들어가면 같은데이터를 갖고 시작할수 있다.

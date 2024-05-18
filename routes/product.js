@@ -13,7 +13,7 @@ const { getPurchased, deletePurchased,createPurchased } = require('../controller
 
 //상품을 조회하고, 수정하고, 삭제하는 기능 -> 이것도 미들웨어를 사용하여 변경해야한다.
 router.get('/',getProduct);
-router.post('/',uploadProduct) //미완성
+router.post('/',uploadProduct) //여기에는 물품을 올리는 사람의 아이디가 필요없을것 같다.
 router.patch('/', verifyToken, modifyProduct);
 router.delete('/:productid',verifyToken, deleteProduct);
 // router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다

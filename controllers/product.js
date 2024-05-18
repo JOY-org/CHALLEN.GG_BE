@@ -16,7 +16,12 @@ exports.getProduct=async(req,res,next)=>{
 
 exports.uploadProduct=async(req,res,next)=>{
     try {
-        
+        const product= await Product.create(req.body)
+        res.json({
+            code:200,
+            payload:product,
+            message:"등록이 완료되었습니다."
+        })
     } catch (err) {
         console.error(err);
         next(err)
