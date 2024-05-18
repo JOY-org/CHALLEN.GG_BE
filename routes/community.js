@@ -5,7 +5,7 @@ const path=require('path');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 const { verifyToken } = require("../middlewares");
 const {getCommunity, uploadCommunity, deleteCommunity, modifyCommunity }=require('../controllers/community');
-const {getPost, uploadPost, deletePost, modifyPost }=require('../controllers/posts');
+const {getPost, uploadPost, deletePost, modifyPost }=require('../controllers/post');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
