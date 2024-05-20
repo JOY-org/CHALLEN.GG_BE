@@ -10,7 +10,8 @@ class Community extends Sequelize.Model{
             },
             img:{
                 type:Sequelize.STRING(50),
-                allowNull:false,
+                allowNull:true,
+                defaultValue:"이미지경로"
             },
             comment:{
                 type:Sequelize.TEXT,
@@ -28,7 +29,7 @@ class Community extends Sequelize.Model{
         //관계들어갈 곳
         db.Community.belongsToMany(db.User,{foreignKey:'communityid',through:'UserCommunity'}); //사용자의 커뮤니티 테이블 생성
         db.Community.belongsToMany(db.User,{foreignKey:'communityid',through:'CommunityInterest'}); // 흥미있는커뮤니티 테이블 생성
-        db.Community.hasMany(db.Posts)
+        db.Community.hasMany(db.Post)
     }
 }  
 

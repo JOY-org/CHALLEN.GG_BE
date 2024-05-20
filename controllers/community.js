@@ -19,16 +19,26 @@ exports.getCommunity = async(req,res,next)=>{
 
 exports.uploadCommunity = async(req,res,next)=>{
     try{
-        const review = await Community.create(req.body)
+        const community = await Community.create({
+            name:req.body.name,
+            comment:req.body.comment,
+            UserId:req.user.id
+        })
+        res.json({
+            code:200,
+            payload:community,
+            UserId:req.user.id
+        })
     }catch(err){
         console.error(err);
         next(err)
     }
 }
 
+
 exports.modifyCommunity = async (req, res, next) => {
     try {
-        await Community.update(req.body,{where: { id : req.community.id }})
+        await Community.update(req.body,{where: { id : req.params.communityid}})
         res.json({
             code: 200,
             message: '커뮤니티 수정 완료'

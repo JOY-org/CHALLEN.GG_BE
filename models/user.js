@@ -8,7 +8,7 @@ class User extends Sequelize.Model{
                 primaryKey:true,
             },
             password:{
-                type: Sequelize.STRING(20),
+                type: Sequelize.STRING(100),
                 allowNull:false,
             },
             nickname: {
@@ -17,8 +17,9 @@ class User extends Sequelize.Model{
                 unique:true,
             },
             provider:{
-                type:Sequelize.BOOLEAN,
-                allowNull:false,
+                type:Sequelize.STRING(10),
+                allowNull:true,
+                defaultValue:'local'
             },
             img:{
                 type:Sequelize.STRING(200),
@@ -55,15 +56,16 @@ class User extends Sequelize.Model{
         db.User.belongsToMany(db.Challenge,{foreignKey:'userid',through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
         db.User.belongsToMany(db.Community,{foreignKey:'userid',through:'UserCommunity'}); //사용자 이용 커뮤니티 테이블 생성
         db.User.belongsToMany(db.Community,{foreignKey:'userid',through:'CommunityInterest'}); // 흥미있는 커뮤니티 테이블 생성
-        db.User.belongsToMany(db.Posts,{foreignKey:"userid",through:'PostsLike'}); //Posts 테이블 생성
+        db.User.belongsToMany(db.Post,{foreignKey:"userid",through:'PostsLike'}); //Posts 테이블 생성
         db.User.hasMany(db.Cart);
         db.User.hasMany(db.Review);
         db.User.hasMany(db.Enquiry);
         db.User.hasMany(db.Purchased);
-        db.User.hasMany(db.Point);
-        db.User.hasMany(db.Posts);
+        db.User.hasOne(db.Point);d
+        db.User.hasMany(db.Post);
         db.User.hasMany(db.Success);
-        db.User.hasMany(db.Check);
+        db.User.hasMany(db.Check);d
+        db.User.hasMany(db.Notification)
     }
 }
 

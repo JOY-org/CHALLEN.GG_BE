@@ -17,7 +17,7 @@ class Review extends Sequelize.Model{
     static associate(db){
         //관계들어갈 곳
         db.Review.belongsTo(db.User)
-        db.Review.belongsTo(db.Products)
+        db.Review.belongsTo(db.Product)
     }
 }
 

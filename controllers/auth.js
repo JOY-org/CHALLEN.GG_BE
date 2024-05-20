@@ -1,33 +1,62 @@
 const bcrypt = require('bcrypt');
 const {User}= require ('../models')
 const passport = require('passport');
+const jwt = require('jsonwebtoken');
+const {ExtractJwt} = require('passport-jwt')
 
-// const jwt = require('jsonwebtoken');
-
-exports.login = (req, res, next) => {
-    passport.authenticate('local', (err, user, info) => {
-        console.log('authenticate 완료', err, user, info);
-        if (err) {
-            console.error(err);
-            return next(err);
-        }
-        if (!user) {
-            throw new Error(info.message);
-        }
-        return req.login(user, (err) => {
-            console.log('login 실행', err);
+exports.createToken = (req, res, next) => {
+    try{
+        passport.authenticate('local', {session:false}, (err, user, info) => {
             if (err) {
                 console.error(err);
                 return next(err);
+            } else if (!user) {
+                throw new Error(info.message);
             }
-            return res.redirect('/');
-        })
-    })(req, res, next);
+            return req.login(user, (err) => {
+                // token access
+                const accessToken = jwt.sign(
+                    {
+                        id: user.id,
+                        nickname: user.nickname
+                    },
+                    process.env.JWT_SECRET,
+                    // 1시간 후엔 expire
+                    {expiresIn: '1h', issuer: 'multi_project', subject:'accessToken'}
+                );
+
+                // token refresh
+                const refreshToken = jwt.sign(
+                    {
+                        id: user.id,
+                        nickname: user.nickname
+                    },
+                    process.env.JWT_SECRET,
+                    {expiresIn: '7d', issuer: 'multi_project', subject:'accessToken'}
+                );
+                User.update({refreshToken}, {where: {di:user.id}});
+                if(err) {
+                    console.error(err);
+                    return next(err);
+                }
+                res.json({
+                    code:200,
+                    message: '토근 발급 완료',
+                    accessToken,
+                    refreshToken,
+                    userid: user.id
+                });
+            })
+        })(req, res, next);
+    } catch(err){
+        console.error(err);
+        next(err);
+    }
 }
 
 exports.join = async(req,res,next)=>{
     console.log(req.body);
-    const { id,password,nickname}= req.body;
+    const { id,password,nickname}= req.body; //password가 숫자 X 문자열 이여야 한다.
     try {
         const exId = await User.findOne({where:{id}});
         if(exId){
@@ -35,14 +64,13 @@ exports.join = async(req,res,next)=>{
         }
         const exNickname = await User.findOne({where:{nickname}});
         if(exNickname){
-            throw new Error('이미 존재하는 아이디 입니다.')
+            throw new Error('이미 존재하는 닉네임 입니다.')
         }
         const hash =await bcrypt.hash(password,10) //암호화를 10번 정도 돌리자
         await User.create({
             id,
             nickname,
-            password:hash,
-            provider:"local"
+            password:hash 
         });
         res.json({
             code:200,
@@ -54,7 +82,6 @@ exports.join = async(req,res,next)=>{
     }
 }
 
-const jwt = require('jsonwebtoken');
 
 exports.refreshToken = async(req,res,next) =>{
     try{

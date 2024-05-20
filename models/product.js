@@ -1,8 +1,8 @@
 const Sequelize= require('sequelize')
 
-class Products extends Sequelize.Model{
+class Product extends Sequelize.Model{
     static initiate(sequelize){
-        Products.init({
+        Product.init({
             img:{
                 type:Sequelize.STRING(200),
                 allowNull:false,
@@ -15,6 +15,7 @@ class Products extends Sequelize.Model{
             brand:{
                 type:Sequelize.STRING(20),
                 allowNull:true,
+                defaultValue:"X"
             },
             price:{
                 type:Sequelize.INTEGER,
@@ -41,11 +42,11 @@ class Products extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Products.hasMany(db.Cart);
-        db.Products.hasMany(db.Review);
-        db.Products.hasMany(db.Enquiry);
-        db.Products.hasMany(db.Purchased);
+        db.Product.hasMany(db.Cart);
+        db.Product.hasMany(db.Review);
+        db.Product.hasMany(db.Enquiry);
+        db.Product.hasMany(db.Purchased);
     }
 }
 
-module.exports = Products;
+module.exports = Product;

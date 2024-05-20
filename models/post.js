@@ -1,11 +1,12 @@
 const Sequelize = require('sequelize');
 
-class Posts extends Sequelize.Model{
+class Post extends Sequelize.Model{
     static initiate(sequelize){
-        Posts.init({
+        Post.init({
             img:{
                 type: Sequelize.STRING(225),
                 allowNull:false,
+                defaultValue:"이미지 경로"
             },
             content:{
                 type: Sequelize.TEXT,
@@ -25,9 +26,9 @@ class Posts extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Posts.belongsToMany(db.User,{foreignKey:"postid",through:'PostsLike'}) //Posts 테이블 생성
-        db.Posts.belongsTo(db.User)
-        db.Posts.belongsTo(db.Community)
+        db.Post.belongsToMany(db.User,{foreignKey:"postid",through:'PostsLike'}) //Posts 테이블 생성
+        db.Post.belongsTo(db.User)
+        db.Post.belongsTo(db.Community)
     }
 }
-module.exports=Posts;
+module.exports=Post;

@@ -1,10 +1,10 @@
-const {User, Posts} = require('../models');
+const { Post} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
-exports.getPosts = async(req,res,next)=>{
+exports.getPost = async(req,res,next)=>{
     try {
-        const posts = await Posts.findAll({
+        const posts = await Post.findAll({
             order:[['createdAt','DESC']]
         })
         // if (posts){
@@ -22,13 +22,18 @@ exports.getPosts = async(req,res,next)=>{
     }
 }
 
-exports.uploadPosts = async(req,res,next)=>{
+exports.uploadPost = async(req,res,next)=>{
     try{
-        const review = await Community.create({
-            title : req.body.title,
-            img : req.body.img,
-            content : req.body.content,
-            // userId: req.user.id, // 여기 user는 어디서 오는 건지 모르겠음
+        const post = await Post.create({
+            title :req.body.title,
+            content:req.body.content,
+            UserId: req.user.id,
+        })
+        res.json({
+            code:200,
+            payload : post,
+            message:"업로드를 완료 했습니다.",
+            UserId:req.user.id,
         })
     }catch(err){
         console.error(err);
@@ -36,14 +41,14 @@ exports.uploadPosts = async(req,res,next)=>{
     }
 }
 
-exports.modifyPosts = async (req, res, next) => {
+exports.modifyPost = async (req, res, next) => {
     try {
-        await Posts.update({
+        await Post.update({
             title: req.body.title,
             img: req.body.img,
             content: req.body.content,
         },{
-            where: { id : req.community.id }
+            where: { id : req.params.postid}
         });
 
         res.json({
@@ -56,9 +61,9 @@ exports.modifyPosts = async (req, res, next) => {
     }
 }
 
-exports.deletePosts = async(req,res,next)=>{
+exports.deletePost = async(req,res,next)=>{
     try{
-        await Posts.destroy({
+        await Post.destroy({
             where:{id: req.params.postid}
         })
         res.json({

@@ -21,7 +21,7 @@ class Purchased extends Sequelize.Model{
     static associate(db){
         //관계들어갈 곳
         db.Purchased.belongsTo(db.User)
-        db.Purchased.belongsTo(db.Products)
+        db.Purchased.belongsTo(db.Product)
     }
 }
 

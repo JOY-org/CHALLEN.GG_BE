@@ -28,7 +28,7 @@ exports.uploadChallenge = async(req,res,next)=>{
 
 exports.modifyChallenge = async (req, res, next) => {
     try {
-        await Challenge.update(req.body,{where: { id : req.community.id }})
+        await Challenge.update(req.body,{where: { id : req.params.challengeid }})
         res.json({
             code: 200,
             message: '챌린지 수정 완료'
@@ -42,7 +42,7 @@ exports.modifyChallenge = async (req, res, next) => {
 exports.deleteChallenge = async(req,res,next)=>{
     try{
         await Challenge.destroy({
-            where:{id: req.params.id}
+            where:{id: req.params.challengeid}
         })
         res.json({
             code:200,
