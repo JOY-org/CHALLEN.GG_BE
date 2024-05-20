@@ -4,7 +4,7 @@ const {Notification}= require ('../models')
 exports.getNotification=async(req,res,next)=>{
     try {
         const notifi = await Notification.findAll({
-            where : {id:req.user.id}
+            where : {UserId: req.user.id}
         })
         res.json({
             code:200,

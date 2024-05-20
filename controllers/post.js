@@ -1,11 +1,15 @@
-const { Post} = require('../models');
+const { Post ,User, Community} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
 exports.getPost = async(req,res,next)=>{
     try {
         const posts = await Post.findAll({
-            order:[['createdAt','DESC']]
+            order:[['createdAt','DESC']],
+            include: {
+                model: Community,
+                attributes: ['name', 'img']
+            }
         })
         // if (posts){
         //     const post = await User.getPosts({
@@ -27,6 +31,7 @@ exports.uploadPost = async(req,res,next)=>{
         const post = await Post.create({
             title :req.body.title,
             content:req.body.content,
+            CommunityId: req.body.community_id,
             UserId: req.user.id,
         })
         res.json({
