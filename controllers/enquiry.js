@@ -21,7 +21,7 @@ exports.getEnquiry = async(req, res, next)=>{
         console.error(err);
         next(err);
     }
-} // 미완성
+} 
 
 exports.uploadEnquiry = async(req,res,next)=>{
     try{

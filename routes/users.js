@@ -39,15 +39,15 @@ router.delete('/notification',verifyToken, deleteNotification)
 
 
 //팔로우
-router.post('/follow', verifyToken, follow);
-router.delete('/follow', verifyToken, unfollow);
+// router.post('/follow', verifyToken, follow);
+// router.delete('/follow', verifyToken, unfollow);
 // /v1/users/followers/:id [GET - 특정 회원을 팔로우하는 사람들 조회] 로그인 X
-router.get('/followers/:id', getFollowers);
+// router.get('/followers/:id', getFollowers);
 // /v1/users/followings/:id [GET - 특정 회원이 팔로우하는 사람들 조회] 로그인 X
-router.get('/followings/:id', getFollowings);
+// router.get('/followings/:id', getFollowings);
 
 //포인트
-router.get('/point',verifyToken,getPoint);
-router.patch('/point',verifyToken,modifyPoint);
+// router.get('/point',verifyToken,getPoint);
+// router.patch('/point',verifyToken,modifyPoint);
 
 module.exports = router;

@@ -1,6 +1,7 @@
 const passport = require("passport");
 
 exports.verifyToken = (req, res, next) => {
+    console.log('test');
     try {
         // jwt
         passport.authenticate('jwt', {session: false}, (err, user, authErr) => {
