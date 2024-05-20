@@ -1,5 +1,5 @@
 const passport = require('passport')
-const {User} = require('../models')
+const {User,Point, Notification} = require('../models')
 const kakao = require('./kakao')
 const local = require('./local');
 const google = require('./google');
@@ -34,6 +34,10 @@ module.exports =()=> {
                 {
                     model:Point,
                     attribute:['id','point'],
+                },
+                {
+                    model:Notification,
+                    attribute:['content']
                 }
             ]
         })
