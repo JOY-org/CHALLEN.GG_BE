@@ -16,14 +16,33 @@ module.exports =()=> {
     }) // 위에 google과 kakao가 성공한다면 여기를 거치게 된다,
 
     //여기 이제 deserialize -> 부분을 만들어야한다.
-    passport.deserializeUser((id, done) => {
-        User.findOne({
-            where: { id },
+    // 매번 로그인한다면 가져와야할 부분
+    passport.deserializeUser((id,done)=>{
+        User.findOne({  //id를 가지고 팔로워와 팔로윙도 가져오는 것이다.
+            where:{ id },
+            include :[
+                {
+                    model:User,
+                    attribute:['id','nickname'],
+                    as:'Follwers'
+                },
+                {
+                    model:User,
+                    attribute:['id','nickname'],
+                    as:'Follwings'
+                },
+                {
+                    model:Point,
+                    attribute:['id','point'],
+                }
+            ]
         })
-        .then(user => {
-            done(null, user); // req.user에 저장
+        .then(user =>{
+            done(null,user);
         })
-        .catch(err => done(err));
+        .catch(err=>{
+
+        })
     })
-    // -> 스켈레톤에서는 팔로우와 팔로잉을 가져왔는데 우리꺼에서는 무엇을 가져와야 하는지 의논 필요
+    // -> 스켈레톤에서는 팔로우와 팔로잉을 가져왔는데 우리꺼에서는 무엇을 가져와야 하는지 의논 필요/ 알림과 포인트 까지는 가져와야 할것 같다.
 }

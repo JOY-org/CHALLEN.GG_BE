@@ -1,4 +1,5 @@
 const {User} = require('../models');
+const Point = require('../models/point');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
@@ -40,6 +41,138 @@ exports.deleteUser = async (req,res,next)=>{
             message:'삭제가 완료되었습니다'
         })
     } catch (err) {
+        console.error(err);
+        next(err)
+    }
+}
+
+exports.follow = async (req, res, next) => {
+    try {
+        // 내 아이디 : req.user.id
+        // 상대방 아이디 : req.body.id
+        const user = await User.findOne({
+            where: { id: req.body.id }
+        });
+        if (user) {
+            await user.addFollowers(req.user.id);
+            res.json({
+                code: 200,
+                message: "팔로우 되었습니다."
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "사용자를 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.unfollow = async (req, res, next) => {
+    try {
+        // 내 아이디 : req.user.id
+        // 상대방 아이디 : req.body.id
+        const user = await User.findOne({
+            where: { id: req.body.id }
+        });
+        if (user) {
+            await user.removeFollowers(req.user.id);
+            res.json({
+                code: 200,
+                message: "언팔로우 되었습니다."
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "사용자를 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.getFollowers = async (req, res ,next) => {
+    // 조회할 대상자의 아이디 : req.params.id
+    try {
+        const user = await User.findOne({
+            where: { id: req.params.id }
+        });
+        if (user) {
+            const followers = await user.getFollowers({
+                attributes: ['id', 'nickname', 'email', 'provider']
+            });
+            res.json({
+                code: 200,
+                payload: followers
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "사용자를 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.getFollowings = async (req, res ,next) => {
+    // 조회할 대상자의 아이디 : req.params.id
+    try {
+        const user = await User.findOne({
+            where: { id: req.params.id }
+        });
+        if (user) {
+            const followings = await user.getFollowings({
+                attributes: ['id', 'nickname', 'email', 'provider']
+            });
+            res.json({
+                code: 200,
+                payload: followings
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "사용자를 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.getPoint = async(req,res,next) =>{
+    try {
+        const point = await Point.findOne({
+            where:{ id:req.user.id}
+        })
+        res.json({
+            code:200,
+            payload:point,
+            message:"point 조회 완료"
+        })
+    } catch (err) {
+        console.error(err);
+        next(err)
+    }
+}
+
+exports.modifyPoint = async(req,res,next)=>{
+    try{
+        const point = await Point.update(req.body, {where:{id:req.user.id}})
+        res.jsont({
+            code:200,
+            payload:point,
+            message:"point 수정 완료"
+        })
+    }catch(err){
         console.error(err);
         next(err)
     }

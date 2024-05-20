@@ -15,7 +15,12 @@ exports.getPurchased = async(req,res,next)=>{
 
 exports.createPurchased = async(req,res,next) =>{
     try {
-        "미완성"
+        const purchased = await Purchased.create(req.body)
+        res.json({
+            code:200,
+            message:"구매목록에 등록이 완료되었습니다.",
+            payload:purchased  
+        })
     } catch (err) {
         console.error(err);
         next(err)
