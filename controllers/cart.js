@@ -7,7 +7,10 @@ exports.getCart = async(req,res,next)=>{
         const cart= await Cart.findAll({
             where:{id:req.user.id}
         });
-        res.json(cart)
+        res.json({
+            code:200,
+            payload:cart
+        })
     }catch(err){
         console.error(err);
         next(err);

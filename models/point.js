@@ -16,7 +16,7 @@ class Point extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Point.hasMany(db.User)
+        db.Point.belongsTo(db.User)
     }
 }
 

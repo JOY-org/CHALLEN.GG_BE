@@ -61,10 +61,10 @@ class User extends Sequelize.Model{
         db.User.hasMany(db.Review);
         db.User.hasMany(db.Enquiry);
         db.User.hasMany(db.Purchased);
-        db.User.hasMany(db.Point);
+        db.User.hasOne(db.Point);d
         db.User.hasMany(db.Post);
         db.User.hasMany(db.Success);
-        db.User.hasMany(db.Check);
+        db.User.hasMany(db.Check);d
         db.User.hasMany(db.Notification)
     }
 }
