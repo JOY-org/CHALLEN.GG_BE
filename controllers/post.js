@@ -6,16 +6,11 @@ exports.getPost = async(req,res,next)=>{
     try {
         const posts = await Post.findAll({
             order:[['createdAt','DESC']],
-            include: {
-                model: Community,
-                attributes: ['name', 'img']
-            }
+            // include: {
+            //     model: Community,
+            //     attributes: ['name', 'img']
+            // }
         })
-        // if (posts){
-        //     const post = await User.getPosts({
-        //         attributes: [nickname]
-        //     });
-        // }
         res.json({
             code:200,
             payload: posts
@@ -31,7 +26,6 @@ exports.uploadPost = async(req,res,next)=>{
         const post = await Post.create({
             title :req.body.title,
             content:req.body.content,
-            CommunityId: req.body.community_id,
             UserId: req.user.id,
         })
         res.json({

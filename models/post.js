@@ -9,12 +9,17 @@ class Post extends Sequelize.Model{
                 defaultValue:"이미지 경로"
             },
             content:{
-                type: Sequelize.TEXT,
+                type: Sequelize.STRING(100),
                 allowNull:false
             },
             title:{
                 type:Sequelize.STRING(30),
                 allowNull:false
+            },
+            categoty:{
+                type:Sequelize.STRING(10),
+                allowNull:false,
+                defaultValue:"자유"
             }
         },{
             timestamps:true,
@@ -28,7 +33,6 @@ class Post extends Sequelize.Model{
         //관계들어갈 곳
         db.Post.belongsToMany(db.User,{foreignKey:"postid",through:'PostsLike'}) //Posts 테이블 생성
         db.Post.belongsTo(db.User)
-        db.Post.belongsTo(db.Community)
     }
 }
 module.exports=Post;

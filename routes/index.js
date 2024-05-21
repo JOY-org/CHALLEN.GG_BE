@@ -4,7 +4,7 @@ const router = express.Router();
 const userRouter = require('./users');
 // const postRouter = require('./post');
 const challengeRouter = require('./challenge')
-const communityRouter = require('./community')
+const postRouter = require('./post')
 const productRouter= require('./product')
 const authRouter = require('./auth')
 const { dummyInput } = require('../controllers/dummy');
@@ -21,7 +21,7 @@ router.use('/users', userRouter);
 router.use('/challenge', challengeRouter);
 
 // /v1/community
-router.use('/community', communityRouter);
+router.use('/post', postRouter);
 
 // /v1/product
 router.use('/product',productRouter);

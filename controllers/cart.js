@@ -1,4 +1,4 @@
-const {User, Product, Cart} = require('../models');
+const { Cart} = require('../models');
 const op = require('sequelize').Op;
 
 

@@ -54,8 +54,6 @@ class User extends Sequelize.Model{
         db.User.belongsToMany(db.User, { foreignKey: 'followingId', as: 'Followers', through: 'Follow' });
         db.User.belongsToMany(db.User, { foreignKey: 'followerId', as: 'Followings', through: 'Follow' });
         db.User.belongsToMany(db.Challenge,{foreignKey:'userid',through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
-        db.User.belongsToMany(db.Community,{foreignKey:'userid',through:'UserCommunity'}); //사용자 이용 커뮤니티 테이블 생성
-        db.User.belongsToMany(db.Community,{foreignKey:'userid',through:'CommunityInterest'}); // 흥미있는 커뮤니티 테이블 생성
         db.User.belongsToMany(db.Post,{foreignKey:"userid",through:'PostsLike'}); //Posts 테이블 생성
         db.User.hasMany(db.Cart);
         db.User.hasMany(db.Review);
