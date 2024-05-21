@@ -6,10 +6,10 @@ exports.getPost = async(req,res,next)=>{
     try {
         const posts = await Post.findAll({
             order:[['createdAt','DESC']],
-            // include: {
-            //     model: Community,
-            //     attributes: ['name', 'img']
-            // }
+            include: {
+                model: User,
+                attributes: ['id']
+            }
         })
         res.json({
             code:200,
@@ -42,11 +42,7 @@ exports.uploadPost = async(req,res,next)=>{
 
 exports.modifyPost = async (req, res, next) => {
     try {
-        await Post.update({
-            title: req.body.title,
-            img: req.body.img,
-            content: req.body.content,
-        },{
+        await Post.update(req.body,{
             where: { id : req.params.postid}
         });
 

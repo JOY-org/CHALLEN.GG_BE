@@ -5,7 +5,11 @@ const op = require('sequelize').Op;
 exports.getCart = async(req,res,next)=>{
     try{
         const cart= await Cart.findAll({
-            where:{id:req.user.id}
+            where:{id:req.user.id},
+            include: {
+                model: User,
+                attributes: ['id']
+            }
         });
         res.json({
             code:200,
@@ -17,15 +21,30 @@ exports.getCart = async(req,res,next)=>{
     }
 }
 
+exports.uploadCart= async(req,res,next)=>{
+    try {
+        const cart = await Cart.create({
+            count:req.body.count,
+            ProductId:req.body.productid,
+            UserId: req.user.id
+        })
+        res.json({
+            code:200,
+            message:"장바구니에 상품을 담았습니다.",
+            payload:cart
+        })
+    } catch (err) {
+        console.error(err);
+        next(err)
+    }
+}
+
 exports.modifyCart = async(req,res,next)=>{ // 변경될만한 거는 삭제를 제외한다면 상품 개수 뿐이다.
     try{
         await Cart.update({
-            count:req.body.count 
+            count:req.body.count,
         },{
             where:{id:req.params.productid}
-        })
-        const cart= await Cart.findAll({
-            where:{id:req.user.id} 
         })
         res.json({
             code:200,
@@ -42,9 +61,6 @@ exports.deleteCart = async(req,res,next)=>{
     try{
         await Cart.destroy({
             where:{id: req.params.productid}
-        })
-        const cart = await Cart.findAll({
-            where:{id:req.user.id}
         })
         res.jsont({
             code:200,

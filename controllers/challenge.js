@@ -19,7 +19,17 @@ exports.getChallenge = async(req,res,next)=>{
 
 exports.uploadChallenge = async(req,res,next)=>{
     try{
-        const review = await Challenge.create(req.body)
+        const challenge = await Challenge.create({
+            name:req.body.name,
+            StartDay:req.body.startDay,
+            EndDay:req.body.endDay,
+            UserId:req.user.id
+        })
+        res.json({
+            code:200,
+            message:"챌린지 등록이 완료되었습니다.",
+            payload:challenge
+        })
     }catch(err){
         console.error(err);
         next(err)
