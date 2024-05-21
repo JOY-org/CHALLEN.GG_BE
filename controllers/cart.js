@@ -25,7 +25,7 @@ exports.uploadCart= async(req,res,next)=>{
     try {
         const cart = await Cart.create({
             count:req.body.count,
-            ProductId:req.body.productid,
+            ProductId:req.body.productId,
             UserId: req.user.id
         })
         res.json({
@@ -41,10 +41,10 @@ exports.uploadCart= async(req,res,next)=>{
 
 exports.modifyCart = async(req,res,next)=>{ // 변경될만한 거는 삭제를 제외한다면 상품 개수 뿐이다.
     try{
-        await Cart.update({
+        const cart = await Cart.update({
             count:req.body.count,
         },{
-            where:{id:req.params.productid}
+            where:{id:req.params.productId}
         })
         res.json({
             code:200,
@@ -60,7 +60,7 @@ exports.modifyCart = async(req,res,next)=>{ // 변경될만한 거는 삭제를 
 exports.deleteCart = async(req,res,next)=>{
     try{
         await Cart.destroy({
-            where:{id: req.params.productid}
+            where:{id: req.params.productId}
         })
         res.jsont({
             code:200,

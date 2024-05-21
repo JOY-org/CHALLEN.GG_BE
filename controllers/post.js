@@ -43,7 +43,7 @@ exports.uploadPost = async(req,res,next)=>{
 exports.modifyPost = async (req, res, next) => {
     try {
         await Post.update(req.body,{
-            where: { id : req.params.postid}
+            where: { id : req.params.postId}
         });
 
         res.json({
@@ -59,7 +59,7 @@ exports.modifyPost = async (req, res, next) => {
 exports.deletePost = async(req,res,next)=>{
     try{
         await Post.destroy({
-            where:{id: req.params.postid}
+            where:{id: req.params.postId}
         })
         res.json({
             code:200,

@@ -25,8 +25,8 @@ const imgupload=multer({
 // 게시물 관련
 router.get('/', getPost);
 router.post('/', verifyToken, uploadPost); // 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
-router.patch('/:postid', modifyPost); 
-router.delete('/:postid', deletePost);
+router.patch('/:postId', modifyPost); 
+router.delete('/:postId', deletePost);
 // router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다
 
 module.exports = router;

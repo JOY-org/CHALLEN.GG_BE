@@ -45,7 +45,7 @@ class User extends Sequelize.Model{
             paranoid: true,
             //paranoid :deletedAt 생성, true 때문에 완전 삭제가 되는것이 아니라 삭제된 시간이 뜬다.
             charset: "utf8",
-            collate: "utf8_general_ci",
+            collate: "utf8_general_ci"
         })
     }
     static associate(db){
@@ -54,7 +54,7 @@ class User extends Sequelize.Model{
         db.User.belongsToMany(db.User, { foreignKey: 'followingId', as: 'Followers', through: 'Follow' });
         db.User.belongsToMany(db.User, { foreignKey: 'followerId', as: 'Followings', through: 'Follow' });
         db.User.belongsToMany(db.Challenge,{foreignKey:'userid',through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
-        db.User.belongsToMany(db.Post,{foreignKey:"userid",through:'PostsLike'}); //Posts 테이블 생성
+        db.User.belongsToMany(db.Post,{foreignKey:"userid",through:'PostsLike'}); //PostsLike 테이블 생성
         db.User.hasMany(db.Cart);
         db.User.hasMany(db.Review);
         db.User.hasMany(db.Enquiry);

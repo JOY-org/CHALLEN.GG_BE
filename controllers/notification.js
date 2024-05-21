@@ -19,7 +19,10 @@ exports.getNotification=async(req,res,next)=>{
 
 exports.uploadNotification = async(req,res,next)=>{
     try {
-        const notifi = await Notification.create(req.body);
+        const notifi = await Notification.create({
+            UserId:req.user.id,
+            content: req.body.content
+        });
         res.json({
             code:200,
             payload:notifi,

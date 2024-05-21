@@ -5,22 +5,22 @@ exports.getReview = async(req, res, next)=>{
     try{
         let reviews=[];
         reviews=await Review.findAll({
-            order:['createdAt','DESC']
-        });//attributes로 user의 닉네임, 레밸들을 가져와야한다.
-        if (reviews){
-            const review = await User.getReview({
-                attributes :[nickname]
-            }); // 이부분이 맞나 확인 
-        }
+            order:[['createdAt','DESC']],
+            include:{
+                model: User,
+                attributes: ['id']
+            }
+        });
         res.json({
             code:200,
-            payload:reviews
+            payload:reviews,
+            message:"리뷰글 열람 완료"
         });
     }catch(err){
         console.error(err);
         next(err);
     }
-} // 미완성
+} 
 
 exports.uploadReview = async(req,res,next)=>{
     try{
@@ -31,6 +31,7 @@ exports.uploadReview = async(req,res,next)=>{
             title : req.body.title,
             content : req.body.content,
             UserId:req.user.id,
+            ProductId:req.body.productId
         })
         res.json({
             code:200,
@@ -48,14 +49,20 @@ exports.modifyReview = async(req,res,next)=>{
             title:req.body.title,
             content:req.body.content
         },{
-            where:{id:req.params.id}
+            where:{id:req.params.reviewId}
         }); //프론트에서 누른다면 Review의 아이디가 찍혀 그 id를 교체해준다.
-
-        //수정했으면 아래로 다시 뿌려줘야하는데 이게 맞는가?
         const review = await Review.findAll({
-            order:['createdAt','DESC'] //이렇게해서 정렬을 해준다
+            order:['createdAt','DESC'],
+            include:{
+                model: User,
+                attributes: ['id']
+            } //이렇게해서 정렬을 해준다
         })
-        //attributes로 user의 닉네임, 레밸들을 가져와야한다.
+        res.json({
+            code: 200,
+            payload:review,
+            message:"리뷰글 변경이 완료되었습니다"
+        })
     }catch(err){
         console.error(err);
         next(err)
@@ -65,7 +72,7 @@ exports.modifyReview = async(req,res,next)=>{
 exports.deleteReview = async(req,res,next)=>{
     try{
         await Review.destroy({
-            where:{id:req.params.id} 
+            where:{id:req.params.reviewId} 
             //프론트에서 누른다면 Review의 아이디가 찍혀 그 id를 가지고 지운다.
         })
         res.json({
