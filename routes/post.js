@@ -24,9 +24,9 @@ const imgupload=multer({
 
 // 게시물 관련
 router.get('/', getPost);
-router.post('/', verifyToken, uploadPost); // 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
+router.post('/', verifyToken, uploadPost); // post, 업로드 하는것은 만든 사용자가 필요하기 때문에 verify를 넣어준것이다.
 //post /v1/post/image -- 게시물이미지 업로드
-router.post('/image', verifyToken, imgupload.single('img'),uploadImg);
+router.post('/image', verifyToken, imgupload.single('img'), uploadImg); // 이미지 save저장과 이미지 url res에 담아 보내기
 router.patch('/:postId', modifyPost); 
 router.delete('/:postId', deletePost);
 

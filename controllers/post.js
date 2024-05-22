@@ -11,14 +11,6 @@ exports.getPost = async (req, res, next) => {
                 attributes: ['id']
             }
         });
-        if (posts.length === 0) {
-            return res.json({
-                code: 200,
-                message: '개시글이 없습니다.',
-                payload: []
-            });
-        }
-
         res.json({
             code: 200,
             payload: posts
@@ -35,6 +27,7 @@ exports.uploadPost = async(req,res,next)=>{
             title :req.body.title,
             content:req.body.content,
             category:req.body.category,
+            img:req.body.img,
             UserId: req.user.id,
         })
         res.json({
@@ -58,10 +51,7 @@ exports.uploadImg =(req,res)=>{
 
 exports.modifyPost = async (req, res, next) => {
     try {
-        await Post.update({
-            content:req.body.content,
-            img:req.body.img
-        },{
+        await Post.update(req.body,{
             where: { id : req.params.postId}
         });
         const post = await Post.findOne({
