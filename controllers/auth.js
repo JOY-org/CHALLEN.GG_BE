@@ -71,7 +71,7 @@ exports.join = async(req,res,next)=>{
         await User.create({
             id,
             nickname,
-            password:hash 
+            password:hash
         });
         await Point.create({
             UserId: id
@@ -122,7 +122,7 @@ exports.googleLogin = async(req, res, next)=>{
                 throw new Error(info.message);
             }
             return req.login(user,(err)=>{
-                const accessToken = jwt.sign( 
+                const accessToken = jwt.sign(
                     { id: user.id, nickname: user.nickname},
                     process.env.JWT_SECRET,
                     { expiresIn : '1h', issuer: "mini_project", subject: "accessToken"}
@@ -134,13 +134,13 @@ exports.googleLogin = async(req, res, next)=>{
                     { expiresIn : '7d', issuer: "mini_project", subject: "refreshToken"}
                 );
 
-                User.update({refreshToken},{where :{id:user.id}}); //업데이트 되면 refresh토큰열에 새로 refresh토큰을 넣어준다. 
+                User.update({refreshToken},{where :{id:user.id}}); //업데이트 되면 refresh토큰열에 새로 refresh토큰을 넣어준다.
 
                 if (err) {
                     console.error(err);
                     return next(err);
                 }; //여기까지 그냥 로그인한다면 토큰을 주는 것들 반복이다.
-                
+
                 res.cookie("userId",user.id,{
                     httpOnly: false,
                     secure:false
@@ -180,16 +180,16 @@ exports.kakaoLogin = async(req, res, next)=>{
                     { expiresIn : '7d', issuer: "mini_project", subject: "refreshToken"}
                 );
 
-                User.update({refreshToken},{where :{id:user.id}}); 
+                User.update({refreshToken},{where :{id:user.id}});
                 if (err) {
                     console.error(err);
                     return next(err);
-                }; 
-                
+                };
+
                 res.cookie("userId",user.id,{
                     httpOnly: false,
                     secure:false
-                }) 
+                })
 
                 res.cookie("accessToken",accessToken,{
                     httpOnly: false,
