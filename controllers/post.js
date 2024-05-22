@@ -2,24 +2,32 @@ const { Post ,User, Community} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
-exports.getPost = async(req,res,next)=>{
+exports.getPost = async (req, res, next) => {
     try {
         const posts = await Post.findAll({
-            order:[['createdAt','DESC']],
+            order: [['createdAt', 'DESC']],
             include: {
                 model: User,
                 attributes: ['id']
             }
-        })
+        });
+        if (posts.length === 0) {
+            return res.json({
+                code: 200,
+                message: '개시글이 없습니다.',
+                payload: []
+            });
+        }
+
         res.json({
-            code:200,
+            code: 200,
             payload: posts
-        })
+        });
     } catch (err) {
         console.error(err);
-        next(err)
+        next(err);
     }
-}
+};
 
 exports.uploadPost = async(req,res,next)=>{
     try{
