@@ -48,14 +48,31 @@ exports.uploadPost = async(req,res,next)=>{
     }
 }
 
+exports.uploadImg =(req,res)=>{
+    res.json({
+        code: 200,
+        img:`/uploads/${req.file.filename}` //req.file.filename으로 받아 올수 있다.
+    })
+}
+
 exports.modifyPost = async (req, res, next) => {
     try {
-        await Post.update(req.body,{
+        await Post.update({
+            content:req.body.content,
+            img:req.body.img
+        },{
             where: { id : req.params.postId}
         });
-
+        const post = await Post.findOne({
+            where:{id:req.params.id},
+            include :{
+                model:User,
+                attributes:['id','nickname']
+            }
+        }); 
         res.json({
             code: 200,
+            payload:post,
             message: '게시글 수정 완료'
         });
     } catch (err) {
