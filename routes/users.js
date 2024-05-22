@@ -3,7 +3,7 @@ const router = express.Router();
 const multer= require('multer');
 const path=require('path')
 // require('../controllers/user') 에서 필요한 거 가져와서 넣기
-const {getUser, deleteUser,modifyUser, getPoint, modifyPoint }=require('../controllers/user');
+const {getUser, deleteUser,modifyUser, getPoint, modifyPoint, follow, unfollow, getFollowers, getFollowings }=require('../controllers/user');
 const { verifyToken } = require("../middlewares");
 const { verify } = require('crypto');
 const { getNotification, modifyNotification, deleteNotification, uploadNotification } = require('../controllers/notification');
@@ -41,12 +41,12 @@ router.delete('/notification',verifyToken, deleteNotification)
 
 
 //팔로우
-// router.post('/follow', verifyToken, follow);
-// router.delete('/follow', verifyToken, unfollow);
+router.post('/follow', verifyToken, follow);
+router.delete('/follow', verifyToken, unfollow);
 // /v1/users/followers/:id [GET - 특정 회원을 팔로우하는 사람들 조회] 로그인 X
-// router.get('/followers/:id', getFollowers);
+router.get('/followers/:id', getFollowers);
 // /v1/users/followings/:id [GET - 특정 회원이 팔로우하는 사람들 조회] 로그인 X
-// router.get('/followings/:id', getFollowings);
+router.get('/followings/:id', getFollowings);
 
 //포인트
 router.get('/point',verifyToken,getPoint);

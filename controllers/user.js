@@ -151,7 +151,7 @@ exports.getFollowings = async (req, res ,next) => {
 exports.getPoint = async(req,res,next) =>{
     try {
         const point = await Point.findOne({
-            where:{ id:req.user.id}
+            where:{ UserId:req.user.id}
         })
         res.json({
             code:200,
@@ -166,7 +166,7 @@ exports.getPoint = async(req,res,next) =>{
 
 exports.modifyPoint = async(req,res,next)=>{
     try{
-        const point = await Point.update(req.body, {where:{id:req.user.id}})
+        const point = await Point.update(req.body, {where:{UserId:req.user.id}})
         res.jsont({
             code:200,
             payload:point,
