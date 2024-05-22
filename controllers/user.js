@@ -120,7 +120,7 @@ exports.getFollowers = async (req, res ,next) => {
         });
         if (user) {
             const followers = await user.getFollowers({
-                attributes: ['id', 'nickname', 'email', 'provider']
+                attributes: ['id', 'nickname','provider']
             });
             res.json({
                 code: 200,
