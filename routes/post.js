@@ -29,6 +29,6 @@ router.post('/', verifyToken, uploadPost); // 업로드 하는것은 만든 사�
 router.post('/image', verifyToken, imgupload.single('img'),uploadImg);
 router.patch('/:postId', modifyPost); 
 router.delete('/:postId', deletePost);
-// router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다
+
 
 module.exports = router;

@@ -16,10 +16,10 @@ class Post extends Sequelize.Model{
                 type:Sequelize.STRING(30),
                 allowNull:false
             },
-            categoty:{
-                type:Sequelize.STRING(10),
+            category:{
+                type:Sequelize.INTEGER,
                 allowNull:false,
-                defaultValue:"자유"
+                defaultValue:1
             }
         },{
             timestamps:true,
