@@ -2,30 +2,32 @@ const { Post ,User, Community} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
-exports.getPost = async(req,res,next)=>{
+exports.getPost = async (req, res, next) => {
     try {
         const posts = await Post.findAll({
-            order:[['createdAt','DESC']],
+            order: [['createdAt', 'DESC']],
             include: {
                 model: User,
                 attributes: ['id']
             }
-        })
+        });
         res.json({
-            code:200,
+            code: 200,
             payload: posts
-        })
+        });
     } catch (err) {
         console.error(err);
-        next(err)
+        next(err);
     }
-}
+};
 
 exports.uploadPost = async(req,res,next)=>{
     try{
         const post = await Post.create({
             title :req.body.title,
             content:req.body.content,
+            category:req.body.category,
+            img:req.body.img,
             UserId: req.user.id,
         })
         res.json({
@@ -40,14 +42,28 @@ exports.uploadPost = async(req,res,next)=>{
     }
 }
 
+exports.uploadImg =(req,res)=>{
+    res.json({
+        code: 200,
+        img:`/uploads/${req.file.filename}` //req.file.filename으로 받아 올수 있다.
+    })
+}
+
 exports.modifyPost = async (req, res, next) => {
     try {
         await Post.update(req.body,{
             where: { id : req.params.postId}
         });
-
+        const post = await Post.findOne({
+            where:{id:req.params.id},
+            include :{
+                model:User,
+                attributes:['id','nickname']
+            }
+        }); 
         res.json({
             code: 200,
+            payload:post,
             message: '게시글 수정 완료'
         });
     } catch (err) {
