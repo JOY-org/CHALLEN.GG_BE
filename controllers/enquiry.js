@@ -3,19 +3,18 @@ const op = require('sequelize').Op;
 
 exports.getEnquiry = async(req, res, next)=>{
     try{
-        let enquires=[];
-        enquires=await Review.findAll({
-            order:[['createdAt','DESC']]
-        });//attributes로 user의 닉네임, 레밸들을 가져와야한다.
+        const enquires=await Review.findAll({
+            order:[['createdAt','DESC']],
+            include:{
+                model: User,
+                attributes: ['id']
+            }
+        });
         console.log(enquires);
-        // if (enquires){
-        //     const enquiry= await User.getReview({
-        //         attributes :[nickname]
-        //     }); // 이부분이 맞나 확인 
-        // }
         res.json({
             code:200,
-            payload:enquires
+            payload:enquires,
+            message:"문의글 열람이 완료되었습니다."
         });
     }catch(err){
         console.error(err);
@@ -31,7 +30,13 @@ exports.uploadEnquiry = async(req,res,next)=>{
         const enquiry = await Enquiry.create({
             title : req.body.title,
             content : req.body.content,
-            UserId:req.user.id,
+            UserId : req.user.id,
+            ProductId: req.body.ProductId
+        })
+        res.json({
+            code:200,
+            payload: enquiry,
+            message:"문의글 등록이 완료되었습니다."
         })
     }catch(err){
         console.error(err);
@@ -45,14 +50,22 @@ exports.modifyEnquiry = async(req,res,next)=>{
             title:req.body.title,
             content:req.body.content
         },{
-            where:{id:req.params.id}
+            where:{id:req.params.enquiryId}
         }); //프론트에서 누른다면 Review의 아이디가 찍혀 그 id를 교체해준다.
 
         //수정했으면 아래로 다시 뿌려줘야하는데 이게 맞는가?
         const enquiry = await Enquiry.findAll({
-            order:['createdAt','DESC'] //이렇게해서 정렬을 해준다
+            order:['createdAt','DESC'], //이렇게해서 정렬을 해준다
+            include:{
+                model: User,
+                attributes: ['id']
+            }
         })
-        //attributes로 user의 닉네임, 레밸들을 보내줘야한다.
+        res.json({
+            code:200,
+            payload:enquiry,
+            message:"문의글 수정이 완료되었습니다."
+        })
     }catch(err){
         console.error(err);
         next(err)
@@ -62,8 +75,7 @@ exports.modifyEnquiry = async(req,res,next)=>{
 exports.deleteEnquiry = async(req,res,next)=>{
     try{
         await Enquiry.destroy({
-            where:{id:req.params.id} 
-            //프론트에서 누른다면 Review의 아이디가 찍혀 그 id를 가지고 지운다.
+            where:{id:req.params.enquiryId} //문의글의 아이다
         })
         res.json({
             code:200,

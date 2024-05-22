@@ -18,7 +18,7 @@ router.use('/auth', authRouter)//로그인
 router.use('/users', userRouter);
 
 // /v1/challenge
-router.use('/challenge', challengeRouter);
+router.use('/', challengeRouter);
 
 // /v1/community
 router.use('/post', postRouter);

@@ -6,6 +6,13 @@ exports.getNotification=async(req,res,next)=>{
         const notifi = await Notification.findAll({
             where : {UserId: req.user.id}
         })
+        if(notifi.length ===0 ){
+            return res.json({
+                code: 200,
+                message: '알림이 없습니다.',
+                payload: []
+            });
+        }
         res.json({
             code:200,
             payload:notifi,
@@ -19,7 +26,10 @@ exports.getNotification=async(req,res,next)=>{
 
 exports.uploadNotification = async(req,res,next)=>{
     try {
-        const notifi = await Notification.create(req.body);
+        const notifi = await Notification.create({
+            UserId:req.user.id,
+            content: req.body.content
+        });
         res.json({
             code:200,
             payload:notifi,

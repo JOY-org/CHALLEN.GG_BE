@@ -15,7 +15,11 @@ exports.getPurchased = async(req,res,next)=>{
 
 exports.createPurchased = async(req,res,next) =>{
     try {
-        const purchased = await Purchased.create(req.body)
+        const purchased = await Purchased.create({
+            count : req.body.count,
+            UserId: req.user.id,
+            ProductId: req.body.productId
+        })
         res.json({
             code:200,
             message:"구매목록에 등록이 완료되었습니다.",

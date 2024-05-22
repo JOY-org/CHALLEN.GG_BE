@@ -3,7 +3,7 @@ const op = require('sequelize').Op;
 
 exports.getProduct=async(req,res,next)=>{
     try {
-        const product = await Product.findAll({})
+        const product = await Product.findAll()
         res.json({
             code:200,
             payload: product
@@ -30,7 +30,7 @@ exports.uploadProduct=async(req,res,next)=>{
 
 exports.modifyProduct = async(req,res,next)=>{
     try {
-        await Product.update(req.body, {where: {id: req.body.id}})
+        await Product.update(req.body, {where: {id: req.params.productId}})
         res.json({
             code:200,
             message:'수정이 완료되었습니다'
@@ -44,7 +44,7 @@ exports.modifyProduct = async(req,res,next)=>{
 exports.deleteProduct = async(req,res,next)=>{
     try {
         await Product.destroy({
-            where:{id:req.params.productid}
+            where:{id:req.params.productId}
         })
         res.json({
             code:200,

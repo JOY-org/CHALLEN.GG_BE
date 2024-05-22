@@ -13,6 +13,7 @@ class Purchased extends Sequelize.Model{
                 allowNull:false
             }
         },{
+            timestamps:true,
             sequelize,
             charset: "utf8",
             collate: "utf8_general_ci",

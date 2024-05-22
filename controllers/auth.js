@@ -2,7 +2,8 @@ const bcrypt = require('bcrypt');
 const {User}= require ('../models')
 const passport = require('passport');
 const jwt = require('jsonwebtoken');
-const {ExtractJwt} = require('passport-jwt')
+const {ExtractJwt} = require('passport-jwt');
+const Point = require('../models/point');
 
 exports.createToken = (req, res, next) => {
     try{
@@ -72,6 +73,9 @@ exports.join = async(req,res,next)=>{
             nickname,
             password:hash 
         });
+        await Point.create({
+            UserId: id
+        }); //로그인 하게 된다면 0포인트를 확인 할수 있다.
         res.json({
             code:200,
             message:"회원가입이 완료되었습니다."
@@ -81,7 +85,6 @@ exports.join = async(req,res,next)=>{
         next(err)
     }
 }
-
 
 exports.refreshToken = async(req,res,next) =>{
     try{

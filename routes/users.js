@@ -3,10 +3,11 @@ const router = express.Router();
 const multer= require('multer');
 const path=require('path')
 // require('../controllers/user') 에서 필요한 거 가져와서 넣기
-const {getUser, deleteUser,modifyUser }=require('../controllers/user');
+const {getUser, deleteUser,modifyUser, getPoint, modifyPoint }=require('../controllers/user');
 const { verifyToken } = require("../middlewares");
 const { verify } = require('crypto');
-const { getNotification, modifyNotification, deleteNotification } = require('../controllers/notification');
+const { getNotification, modifyNotification, deleteNotification, uploadNotification } = require('../controllers/notification');
+
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -34,6 +35,7 @@ router.delete('/', verifyToken, deleteUser)
 
 //알림
 router.get('/notification',verifyToken, getNotification) 
+router.post('/notification',verifyToken,uploadNotification)
 router.patch('/notification',verifyToken, modifyNotification) 
 router.delete('/notification',verifyToken, deleteNotification) 
 
@@ -47,7 +49,7 @@ router.delete('/notification',verifyToken, deleteNotification)
 // router.get('/followings/:id', getFollowings);
 
 //포인트
-// router.get('/point',verifyToken,getPoint);
-// router.patch('/point',verifyToken,modifyPoint);
+router.get('/point',verifyToken,getPoint);
+router.patch('/point',verifyToken,modifyPoint);
 
 module.exports = router;

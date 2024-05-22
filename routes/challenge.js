@@ -23,9 +23,9 @@ const imgupload=multer({
 }) // 챌린지 대표사진
 
 router.get('/', getChallenge);
-router.post('/:challengeid', uploadChallenge); // 미완성
-router.patch('/:challengeid',modifyChallenge);
-router.delete('/:challengeid', deleteChallenge);
+router.post('/', uploadChallenge); // 미완성
+router.patch('/:challengeId',modifyChallenge);
+router.delete('/:challengeId', deleteChallenge);
 
 
 
