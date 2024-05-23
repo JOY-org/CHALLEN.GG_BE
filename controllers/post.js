@@ -6,10 +6,9 @@ exports.getPost = async (req, res, next) => {
     try {
         const posts = await Post.findAll({
             order: [['createdAt', 'DESC']],
-            include: {
-                model: User,
-                attributes: ['id','nickname']
-            }
+            include: [{
+                model: User
+            }]
         });
         res.json({
             code: 200,

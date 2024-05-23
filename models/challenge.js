@@ -30,9 +30,9 @@ class Challenge extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Challenge.belongsToMany(db.User,{foreignKey:'challengeid',through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
-        db.Challenge.hasMany(db.Success)
+        db.Challenge.belongsToMany(db.User, { through:'ChallengeInterest' }); //흥미있는 챌린지 테이블 생성
         db.Challenge.hasMany(db.Check)
+        db.Challenge.hasMany(db.Success)
     }
 }
 

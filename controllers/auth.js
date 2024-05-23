@@ -23,7 +23,7 @@ exports.createToken = (req, res, next) => {
                     },
                     process.env.JWT_SECRET,
                     // 1시간 후엔 expire
-                    {expiresIn: '1h', issuer: 'multi_project', subject:'accessToken'}
+                    {expiresIn: '1m', issuer: 'multi_project', subject:'accessToken'}
                 );
 
                 // token refresh
@@ -88,7 +88,7 @@ exports.join = async(req,res,next)=>{
 
 exports.refreshToken = async(req,res,next) =>{
     try{
-        const {accessToken}= ren.body;
+        const {accessToken}= req.body;
         const accessResult=jwt.decode(accessToken,process.env.JWT_SECRET);
         const user= await User.findOne({where:{id:accessResult.id}})
         const refreshResult= jwt.verify(user.refreshToken,process.env.JWT_SECRET);
