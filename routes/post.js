@@ -8,7 +8,7 @@ const {getPost, getPostByCommId, uploadPost, deletePost, modifyPost, uploadImg, 
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
-        cb(null,'public/uploads')
+        cb(null,'public/uploads/post')
     },
     filename(req,file, cb){
         const ext = path.extname(file.originalname)

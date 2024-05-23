@@ -11,7 +11,7 @@ const { getNotification, modifyNotification, deleteNotification, uploadNotificat
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
-        cb(null,'public/uploads')
+        cb(null,'public/uploads/user')
     },
     filename(req,file, cb){
         const ext = path.extname(file.originalname)
