@@ -71,6 +71,7 @@ exports.follow = async (req, res, next) => {
             where: { id: req.body.id }
         });
         if (user) {
+            // me follower you following
             await user.addFollowers(req.user.id);
             res.json({
                 code: 200,
@@ -93,10 +94,10 @@ exports.unfollow = async (req, res, next) => {
         // 내 아이디 : req.user.id
         // 상대방 아이디 : req.body.id
         const user = await User.findOne({
-            where: { id: req.body.id }
+            where: { id: req.user.id }
         });
         if (user) {
-            await user.removeFollowers(req.user.id);
+            await user.removeFollowings(req.body.id);
             res.json({
                 code: 200,
                 message: "언팔로우 되었습니다."
