@@ -23,7 +23,7 @@ const imgupload=multer({
 }) // 챌린지 대표사진
 
 router.get('/', getChallenge);
-router.post('/', uploadChallenge); // 미완성
+router.post('/', verifyToken, imgupload.single('img'), uploadChallenge); 
 router.patch('/:challengeId',modifyChallenge);
 router.delete('/:challengeId', deleteChallenge);
 

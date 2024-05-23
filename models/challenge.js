@@ -20,6 +20,19 @@ class Challenge extends Sequelize.Model{
                 type:Sequelize.DATE,
                 allowNull:false
             },
+            point:{
+                type:Sequelize.INTEGER,
+                allowNull:false,
+                defaultValue:0
+            },
+            comment:{
+                type:Sequelize.STRING(255),
+                allowNull:true
+            },
+            caution:{
+                type:Sequelize.STRING(255),
+                allowNull:true
+            }
         },{
             timestamps:true,
             sequelize,

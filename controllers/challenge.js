@@ -21,10 +21,9 @@ exports.getChallenge = async(req,res,next)=>{
 exports.uploadChallenge = async(req,res,next)=>{
     try{
         const challenge = await Challenge.create({
-            name:req.body.name,
-            StartDay:req.body.startDay,
-            EndDay:req.body.endDay,
-            UserId:req.user.id
+            ...req.body,
+            UserId:req.user.id,
+            img: req.file ? `/uploads/${req.file.filename}` : "빈 이미지"
         })
         res.json({
             code:200,

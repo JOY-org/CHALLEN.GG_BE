@@ -41,7 +41,7 @@ class User extends Sequelize.Model{
             },
             refreshToken:{
                 type: Sequelize.STRING(255),
-                allowNull:false,
+                allowNull:true,
             }
         },{
             timestamps:true,// createdAt, updatedAt 이것을 false 라고 하면 안뜹니다. 
