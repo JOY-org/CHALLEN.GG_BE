@@ -8,17 +8,9 @@ exports.getPost = async (req, res, next) => {
             order: [['createdAt', 'DESC']],
             include: {
                 model: User,
-                attributes: ['id']
+                attributes: ['id','nickname']
             }
         });
-        if (posts.length === 0) {
-            return res.json({
-                code: 200,
-                message: '개시글이 없습니다.',
-                payload: []
-            });
-        }
-
         res.json({
             code: 200,
             payload: posts
@@ -29,33 +21,70 @@ exports.getPost = async (req, res, next) => {
     }
 };
 
-exports.uploadPost = async(req,res,next)=>{
-    try{
+// exports.uploadPost = async(req,res,next)=>{
+//     try{
+//         const post = await Post.create({
+//             title :req.body.title,
+//             content:req.body.content,
+//             category:req.body.category,
+//             img:req.body.img,
+//             UserId: req.user.id,
+//         })
+//         res.json({
+//             code:200,
+//             payload : post,
+//             message:"업로드를 완료 했습니다.",
+//             UserId:req.user.id,
+//         })
+//     }catch(err){
+//         console.error(err);
+//         next(err)
+//     }
+// }
+
+// exports.uploadImg =(req,res)=>{
+//     res.json({
+//         code: 200,
+//         img:`/uploads/${req.file.filename}` //req.file.filename으로 받아 올수 있다.
+//     })
+// }
+
+exports.uploadPostAndImg = async (req, res, next) => {
+    try {
         const post = await Post.create({
-            title :req.body.title,
-            content:req.body.content,
+            title: req.body.title,
+            content: req.body.content,
+            category: req.body.category,
+            img: req.file ? `/uploads/${req.file.filename}` : null,
             UserId: req.user.id,
-        })
+        });
+
         res.json({
-            code:200,
-            payload : post,
-            message:"업로드를 완료 했습니다.",
-            UserId:req.user.id,
-        })
-    }catch(err){
+            code: 200,
+            payload: post,
+            message: "게시물과 이미지를 업로드했습니다.",
+        });
+    } catch (err) {
         console.error(err);
-        next(err)
+        next(err);
     }
-}
+};
 
 exports.modifyPost = async (req, res, next) => {
     try {
         await Post.update(req.body,{
             where: { id : req.params.postId}
         });
-
+        const post = await Post.findOne({
+            where:{id:req.params.id},
+            include :{
+                model:User,
+                attributes:['id','nickname']
+            }
+        }); 
         res.json({
             code: 200,
+            payload:post,
             message: '게시글 수정 완료'
         });
     } catch (err) {

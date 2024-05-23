@@ -131,3 +131,6 @@ dist
 
 # for ignore root password
 config/
+
+# for ignore root password
+config/
