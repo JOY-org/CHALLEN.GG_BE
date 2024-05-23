@@ -31,8 +31,8 @@ class Post extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Post.belongsToMany(db.User,{foreignKey:"postid",through:'PostsLike'}) //Posts 테이블 생성
         db.Post.belongsTo(db.User)
+        db.Post.belongsToMany(db.User, { through: 'PostsLike' }) //Posts 테이블 생성
     }
 }
 module.exports=Post;

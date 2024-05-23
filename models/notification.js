@@ -15,7 +15,7 @@ class Notification extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Notification.hasMany(db.User)
+        db.Notification.belongsTo(db.User)
     }
 }
 

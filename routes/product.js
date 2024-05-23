@@ -8,12 +8,25 @@ const {getCart, modifyCart, deleteCart, uploadCart}=require('../controllers/cart
 const { getEnquiry, uploadEnquiry, modifyEnquiry, deleteEnquiry } =require('../controllers/enquiry');
 const { getProduct,deleteProduct, modifyProduct, uploadProduct } = require('../controllers/product');
 const { getPurchased, deletePurchased,createPurchased } = require('../controllers/purchased');
-// require('../controllers/~~') 에서 필요한 거 가져와서 넣기
-//put과 post에 차이가 있나?
 
+const storage = multer.diskStorage({
+    destination(req,file,cb){
+        cb(null,'public/uploads')
+    },
+    filename(req,file, cb){
+        const ext = path.extname(file.originalname)
+        cb(null, path.basename(file.originalname,ext)+Date.now()+ext)
+    }
+})
+
+const limits={fileSize: 10 *1024*1024}
+const imgupload=multer({
+    storage,
+    limits
+}) 
 //상품을 조회하고, 수정하고, 삭제하는 기능 -> 이것도 미들웨어를 사용하여 변경해야한다.
 router.get('/',getProduct);
-router.post('/',uploadProduct) //여기에는 물품을 올리는 사람의 아이디가 필요없을것 같다.
+router.post('/', imgupload.single('img'), uploadProduct) //여기에는 물품을 올리는 사람의 아이디가 필요없을것 같다.
 router.patch('/:productId', verifyToken, modifyProduct);
 router.delete('/:productId',verifyToken, deleteProduct);
 // router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다

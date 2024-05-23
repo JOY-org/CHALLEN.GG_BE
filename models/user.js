@@ -50,21 +50,21 @@ class User extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-    
+        db.User.hasMany(db.Calorie);
+        db.User.hasMany(db.Cart);
+        db.User.belongsToMany(db.Challenge,{through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
+        db.User.hasMany(db.Check);
+        db.User.hasMany(db.Enquiry);
+        db.User.hasMany(db.Review);
+        db.User.hasMany(db.Purchased);
+        db.User.hasMany(db.Notification);
+        db.User.hasMany(db.Post);
         db.User.belongsToMany(db.User, { foreignKey: 'followingId', as: 'Followers', through: 'Follow' });
         db.User.belongsToMany(db.User, { foreignKey: 'followerId', as: 'Followings', through: 'Follow' });
-        db.User.belongsToMany(db.Challenge,{foreignKey:'userid',through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
-        db.User.belongsToMany(db.Post,{foreignKey:"userid",through:'PostsLike'}); //PostsLike 테이블 생성
-        db.User.hasMany(db.Cart);
-        db.User.hasMany(db.Review);
-        db.User.hasMany(db.Enquiry);
-        db.User.hasMany(db.Purchased);
-        db.User.hasOne(db.Point);
-        db.User.hasMany(db.Post);
+        db.User.belongsToMany(db.Post,{foreignKey:"UserId",through:'PostsLike'}); //PostsLike 테이블 생성
+        db.User.hasMany(db.Point);
         db.User.hasMany(db.Success);
-        db.User.hasMany(db.Check);
-        db.User.hasMany(db.Notification);
-        db.User.hasMany(db.Calorie);
+        
     }
 }
 

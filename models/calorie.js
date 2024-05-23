@@ -16,7 +16,7 @@ class Calorie extends Sequelize.Model{
         })
     }
     static associate(db){
-        db.Cart.belongsTo(db.User)
+        db.Calorie.belongsTo(db.User)
     }
 }
 
