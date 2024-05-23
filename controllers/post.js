@@ -8,7 +8,7 @@ exports.getPost = async (req, res, next) => {
             order: [['createdAt', 'DESC']],
             include: {
                 model: User,
-                attributes: ['id']
+                attributes: ['id','nickname']
             }
         });
         res.json({

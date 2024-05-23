@@ -2,6 +2,7 @@ const {User} = require('../models');
 const Point = require('../models/point');
 const op = require('sequelize').Op;
 // 컨트롤러 js
+
 exports.getLoginedUser = async(req, res, next) => {
     try {
         const user = await User.findOne({

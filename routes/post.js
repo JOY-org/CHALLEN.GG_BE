@@ -20,7 +20,7 @@ const limits={fileSize: 10 *1024*1024}
 const imgupload=multer({
     storage,
     limits
-}) // 커뮤니티 대표사진
+}) // 게시글 대표사진
 
 // 게시물 관련
 router.get('/', getPost);
