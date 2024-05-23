@@ -38,6 +38,10 @@ class User extends Sequelize.Model{
             googleid:{
                 type:Sequelize.STRING(30),
                 allowNull:true,
+            },
+            refreshToken:{
+                type: Sequelize.STRING(255),
+                allowNull:false,
             }
         },{
             timestamps:true,// createdAt, updatedAt 이것을 false 라고 하면 안뜹니다. 
