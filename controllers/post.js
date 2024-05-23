@@ -2,6 +2,27 @@ const { Post ,User, Community} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
+exports.getPostByCommId = async (req, res, next) => {
+    try {
+        const posts = await Post.findAll({
+            order: [['createdAt', 'DESC']],
+            include: {
+                model: User,
+                attributes: ['id']
+            },
+            where: {
+                category: req.params.commId
+            }
+        });
+        res.json({
+            code: 200,
+            payload: posts
+        });
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+};
 exports.getPost = async (req, res, next) => {
     try {
         const posts = await Post.findAll({

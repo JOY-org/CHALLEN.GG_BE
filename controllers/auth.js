@@ -88,10 +88,10 @@ exports.join = async(req,res,next)=>{
 
 exports.refreshToken = async(req,res,next) =>{
     try{
-        const {accessToken}= req.body;
-        const accessResult=jwt.decode(accessToken,process.env.JWT_SECRET);
+        const {accessToken}= req.body; 
+        const accessResult=jwt.decode(accessToken, process.env.JWT_SECRET);
         const user= await User.findOne({where:{id:accessResult.id}})
-        const refreshResult= jwt.verify(user.refreshToken,process.env.JWT_SECRET);
+        const refreshResult= jwt.verify(user.refreshToken, process.env.JWT_SECRET);
         if(accessResult.id!==refreshResult.id){
             throw new Error('토큰이 일치하지 않습니다.');
         }

@@ -11,7 +11,7 @@ router.post('/join', join);
 
 // // POST /v1/auth/login
 router.post('/login', createToken);
-router.get('/refresh', refreshToken);
+router.post('/refresh', refreshToken);
 
 // /v1/auth/google
 router.get('/google',passport.authenticate('google'))
