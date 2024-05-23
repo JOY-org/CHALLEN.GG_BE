@@ -35,7 +35,7 @@ exports.createToken = (req, res, next) => {
                     process.env.JWT_SECRET,
                     {expiresIn: '7d', issuer: 'multi_project', subject:'accessToken'}
                 );
-                User.update({refreshToken}, {where: {di:user.id}});
+                User.update({refreshToken}, {where: {id:user.id}});
                 if(err) {
                     console.error(err);
                     return next(err);
@@ -88,14 +88,14 @@ exports.join = async(req,res,next)=>{
 
 exports.refreshToken = async(req,res,next) =>{
     try{
-        const {accessToken}= req.body;
-        const accessResult=jwt.decode(accessToken,process.env.JWT_SECRET);
+        const {accessToken}= req.body; 
+        const accessResult=jwt.decode(accessToken, process.env.JWT_SECRET);
         const user= await User.findOne({where:{id:accessResult.id}})
-        const refreshResult= jwt.verify(user.refreshToken,process.env.JWT_SECRET);
+        const refreshResult= jwt.verify(user.refreshToken, process.env.JWT_SECRET);
         if(accessResult.id!==refreshResult.id){
             throw new Error('토큰이 일치하지 않습니다.');
         }
-        const newAccessToken = jwt.sing(
+        const newAccessToken = jwt.sign(
             { id: accessResult.id, nickname: accessResult.nickname},
             process.env.JWT_SECRET,
             {expiresIn:'1h',issuer:"mini_project",subject:"accessToken"}
