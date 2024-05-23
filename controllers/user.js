@@ -37,7 +37,10 @@ exports.getAllUsers = async(req,res,next)=>{
 
 exports.modifyUser = async(req,res,next)=>{
     try {
-        await User.update(req.body,{where:{id:req.user.id}}) //params가 아니라 토큰으로 찾은 user을 넘겨준다.
+        await User.update({
+            ...req.body,
+            img: req.file ? `/uploads/${req.file.filename}` : "빈 이미지"
+        },{where:{id:req.user.id}}) //params가 아니라 토큰으로 찾은 user을 넘겨준다.
         res.json({
             code:200,
             message:'수정이 완료되었습니다'

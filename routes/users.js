@@ -31,7 +31,7 @@ const imgupload=multer({
 // User을 조회하고 수정하고 삭제 하는 부분 -> 미들웨어를 이용하여 변경해야 하는 부분이 있다.
 router.get('/', getAllUsers);
 router.get('/myinfo', verifyToken, getLoginedUser);
-router.patch('/', verifyToken, modifyUser)
+router.patch('/', verifyToken,imgupload.single('img'), modifyUser)
 router.delete('/', verifyToken, deleteUser)
 
 //알림
