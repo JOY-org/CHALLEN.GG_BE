@@ -11,7 +11,7 @@ const { getPurchased, deletePurchased,createPurchased } = require('../controller
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
-        cb(null,'public/uploads')
+        cb(null,'public/uploads/product')
     },
     filename(req,file, cb){
         const ext = path.extname(file.originalname)
