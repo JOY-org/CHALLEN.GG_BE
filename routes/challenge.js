@@ -3,7 +3,7 @@ const router = express.Router();
 const multer= require('multer');
 const path=require('path')
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
-const {getChallenge, uploadChallenge, modifyChallenge, deleteChallenge}=require('../controllers/challenge');
+const {getChallenge, uploadChallenge, modifyChallenge, deleteChallenge, interestChallenge, uninterestChallenge}=require('../controllers/challenge');
 const { verifyToken } = require("../middlewares");
 
 const storage = multer.diskStorage({
@@ -27,6 +27,7 @@ router.post('/', verifyToken, imgupload.single('img'), uploadChallenge);
 router.patch('/:challengeId',modifyChallenge);
 router.delete('/:challengeId', deleteChallenge);
 
-
+router.post('/interestchallenge',verifyToken, interestChallenge);
+router.delete('/interestchallenge', verifyToken, uninterestChallenge);
 
 module.exports = router;

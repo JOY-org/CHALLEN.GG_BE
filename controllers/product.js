@@ -18,7 +18,7 @@ exports.uploadProduct=async(req,res,next)=>{
     try {
         const product= await Product.create({
             ...req.body,
-            img: req.file ? `/uploads/${req.file.filename}` : "빈 이미지"
+            img: req.file ? `/uploads/product/${req.file.filename}` : "빈 이미지"
         })
         if (!req.body.name || (req.body.name && req.body.name.trim() === '')) {
             return res.status(400).json({ code: 400, message: "Product name is required." });

@@ -4,7 +4,7 @@ const multer= require('multer');
 const path=require('path');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 const { verifyToken } = require("../middlewares");
-const {getPost, getPostByCommId, uploadPost, deletePost, modifyPost, uploadImg, uploadPostAndImg }=require('../controllers/post');
+const {getPost, getPostByCommId, uploadPost, deletePost, modifyPost, uploadImg, uploadPostAndImg, likePost, unlikePost }=require('../controllers/post');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -32,5 +32,7 @@ router.get('/:commId', getPostByCommId);
 router.patch('/:postId', modifyPost); 
 router.delete('/:postId', deletePost);
 
+router.post('/postlike',verifyToken, likePost);
+router.delete('/postlike', verifyToken, unlikePost);
 
 module.exports = router;
