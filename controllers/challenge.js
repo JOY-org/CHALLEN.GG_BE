@@ -1,4 +1,4 @@
-const {Challenge} = require('../models');
+const {Challenge, User} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
@@ -54,13 +54,60 @@ exports.deleteChallenge = async(req,res,next)=>{
     try{
         await Challenge.destroy({
             where:{id: req.params.challengeId}
-        })
+        });
         res.json({
             code:200,
             message:"챌린지 삭제 완료"
-        })
+        });
     }catch(err){
         console.error(err);
-        next(err)
+        next(err);
+    }
+}
+
+exports.interestChallenge = async(req, res, next)=>{
+    try {
+        const challenge = await Challenge.findOne({
+            where: {id:req.body.id}
+        });
+        if(challenge){
+            await challenge.addChallengeInterest(req.user.id);
+            res.json({
+                code:200,
+                payload: challenge,
+                message:"흥미있는 챌린지를 추가하셨습니다."
+            })
+        } else{
+            res.json({
+                code : 404,
+                message:"해당 챌린지를 찾을 수 없습니다."
+            })
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.uninterestChallenge = async(req, res, next)=>{
+    try {
+        const user = await User.findOne({
+            where: {id:req.user.id}
+        });
+        if(user){
+            await user.removeChallengeInterest(req.body.id); //챌린지 아이디를 지운다.
+            res.json({
+                code:200,
+                message:"흥미있는 챌린지에서 삭제하였습니다."
+            })
+        } else{
+            res.json({
+                code : 404,
+                message:"사용자를 찾을 수 없습니다."
+            })
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
     }
 }

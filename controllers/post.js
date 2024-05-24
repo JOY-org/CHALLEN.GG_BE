@@ -1,4 +1,4 @@
-const { Post ,User, Community} = require('../models');
+const { Post ,User} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
@@ -124,6 +124,53 @@ exports.deletePost = async(req,res,next)=>{
         })
     }catch(err){
         console.error(err);
-        next(err)
+        next(err);
+    }
+}
+
+exports.likePost = async(req, res, next)=>{
+    try {
+        const post = await Post.findOne({
+            where:{id: req.body.id }
+        });
+        if (post) {
+            await post.addPostsLike(req.user.id);   
+            res.json({
+                code:200,
+                payload : post,
+                message:"해당 게시물을 좋아합니다."
+            })
+        } else{
+            res.json({
+                code : 404,
+                message:"해당 게시물을 찾을 수 없습니다."
+            })
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.unlikePost = async(req, res, next)=>{
+    try {
+        const user = await User.findOne({
+            where:{id: req.user.id }
+        });
+        if (user){
+            await user.removePostsLike(req.body.id); // 게시글 아이디를 찾아 지운다.
+            res.json({
+                code:200,
+                message:"좋아요를 취소하였습니다"
+            });
+        } else {
+            res.json({
+                code: 404,
+                message : "사용자를 찾을 수 없습니다."
+            })
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
     }
 }
