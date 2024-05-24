@@ -39,11 +39,13 @@ exports.modifyUser = async(req,res,next)=>{
     try {
         await User.update({
             ...req.body,
-            img: req.file ? `/uploads/user/${req.file.filename}` : "빈 이미지"
+            img: req.file ? `/uploads/user/${req.file.filename}` : '/uploads/user/default.png'
         },{where:{id:req.user.id}}) //params가 아니라 토큰으로 찾은 user을 넘겨준다.
+        const user = await User.findOne({where:{id:req.user.id}});
         res.json({
             code:200,
-            message:'수정이 완료되었습니다'
+            message:'수정이 완료되었습니다',
+            img: user.img
         })
     } catch (err) {
         console.error(err);

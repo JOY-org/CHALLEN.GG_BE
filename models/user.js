@@ -24,7 +24,7 @@ class User extends Sequelize.Model{
             img:{
                 type:Sequelize.STRING(200),
                 allowNull:true,
-                defaultValue:"이미지 주소",
+                defaultValue:"/uploads/user/default.png",
             },
             exp:{
                 type:Sequelize.INTEGER,
@@ -44,7 +44,7 @@ class User extends Sequelize.Model{
                 allowNull:true,
             }
         },{
-            timestamps:true,// createdAt, updatedAt 이것을 false 라고 하면 안뜹니다. 
+            timestamps:true,// createdAt, updatedAt 이것을 false 라고 하면 안뜹니다.
             sequelize,
             paranoid: true,
             //paranoid :deletedAt 생성, true 때문에 완전 삭제가 되는것이 아니라 삭제된 시간이 뜬다.
@@ -68,7 +68,7 @@ class User extends Sequelize.Model{
         db.User.belongsToMany(db.Post,{foreignKey:"UserId",through:'PostsLike'}); //PostsLike 테이블 생성
         db.User.hasMany(db.Point);
         db.User.hasMany(db.Success);
-        
+
     }
 }
 

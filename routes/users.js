@@ -7,7 +7,7 @@ const {getLoginedUser, getAllUsers, getUser, deleteUser,modifyUser, getPoint, mo
 const { verifyToken } = require("../middlewares");
 const { verify } = require('crypto');
 const { getNotification, modifyNotification, deleteNotification, uploadNotification } = require('../controllers/notification');
-
+const { getCalorie, uploadCalorie, deleteCalorie } = require('../controllers/calorie');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     },
     filename(req,file, cb){
         const ext = path.extname(file.originalname)
-        cb(null, path.basename(file.originalname,ext)+Date.now()+ext)
+        cb(null, path.basename("profileImg_"+req.user.id ,ext) + ext)
     }
 })
 
@@ -31,7 +31,7 @@ const imgupload=multer({
 // User을 조회하고 수정하고 삭제 하는 부분 -> 미들웨어를 이용하여 변경해야 하는 부분이 있다.
 router.get('/', getAllUsers);
 router.get('/myinfo', verifyToken, getLoginedUser);
-router.patch('/', verifyToken,imgupload.single('img'), modifyUser)
+router.patch('/', verifyToken, imgupload.single('img'), modifyUser)
 router.delete('/', verifyToken, deleteUser)
 
 //알림
@@ -52,5 +52,10 @@ router.get('/followings/:id', getFollowings);
 //포인트
 router.get('/point',verifyToken,getPoint);
 router.patch('/point',verifyToken,modifyPoint);
+
+// 칼로리
+router.get('/calorie',verifyToken, getCalorie);
+router.post('/calorie',verifyToken, uploadCalorie); //생성과 업데이트 둘다 가능
+router.delete('/calorie',verifyToken, deleteCalorie);
 
 module.exports = router;
