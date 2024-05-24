@@ -8,7 +8,7 @@ exports.getPostByCommId = async (req, res, next) => {
             order: [['createdAt', 'DESC']],
             include: {
                 model: User,
-                attributes: ['id']
+                attributes: ['nickname']
             },
             where: {
                 category: req.params.commId
