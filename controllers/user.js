@@ -127,7 +127,7 @@ exports.getFollowers = async (req, res ,next) => {
         });
         if (user) {
             const followers = await user.getFollowers({
-                attributes: ['id', 'nickname','provider']
+                attributes: ['id', 'nickname','provider','img']
             });
             res.json({
                 code: 200,
@@ -153,7 +153,7 @@ exports.getFollowings = async (req, res ,next) => {
         });
         if (user) {
             const followings = await user.getFollowings({
-                attributes: ['id', 'nickname','provider']
+                attributes: ['id', 'nickname','provider','img']
             });
             res.json({
                 code: 200,
