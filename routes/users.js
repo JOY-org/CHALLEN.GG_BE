@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     },
     filename(req,file, cb){
         const ext = path.extname(file.originalname)
-        cb(null, path.basename(file.originalname,ext)+Date.now()+ext)
+        cb(null, path.basename("profileImg_"+req.user.id ,ext) + ext)
     }
 })
 
@@ -31,7 +31,7 @@ const imgupload=multer({
 // User을 조회하고 수정하고 삭제 하는 부분 -> 미들웨어를 이용하여 변경해야 하는 부분이 있다.
 router.get('/', getAllUsers);
 router.get('/myinfo', verifyToken, getLoginedUser);
-router.patch('/', verifyToken,imgupload.single('img'), modifyUser)
+router.patch('/', verifyToken, imgupload.single('img'), modifyUser)
 router.delete('/', verifyToken, deleteUser)
 
 //알림
