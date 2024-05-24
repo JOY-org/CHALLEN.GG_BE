@@ -23,7 +23,7 @@ exports.uploadChallenge = async(req,res,next)=>{
         const challenge = await Challenge.create({
             ...req.body,
             UserId:req.user.id,
-            img: req.file ? `/uploads/${req.file.filename}` : "빈 이미지"
+            img: req.file ? `/uploads/challenge/${req.file.filename}` : "빈 이미지"
         })
         res.json({
             code:200,

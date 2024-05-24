@@ -75,7 +75,7 @@ exports.uploadPostAndImg = async (req, res, next) => {
             title: req.body.title,
             content: req.body.content,
             category: req.body.category,
-            img: req.file ? `/uploads/${req.file.filename}` : null,
+            img: req.file ? `/uploads/post/${req.file.filename}` : null,
             UserId: req.user.id,
         });
 
