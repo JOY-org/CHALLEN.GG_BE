@@ -78,10 +78,17 @@ exports.uploadPostAndImg = async (req, res, next) => {
             img: req.file ? `/uploads/post/${req.file.filename}` : null,
             UserId: req.user.id,
         });
+        const result = await Post.findOne({
+            where : {id: post.id},
+            include: [{
+                model: User
+            }]
+        });
+
 
         res.json({
             code: 200,
-            payload: post,
+            payload: result,
             message: "게시물과 이미지를 업로드했습니다.",
         });
     } catch (err) {
