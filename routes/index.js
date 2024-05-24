@@ -7,7 +7,6 @@ const challengeRouter = require('./challenge')
 const postRouter = require('./post')
 const productRouter= require('./product')
 const authRouter = require('./auth')
-const { dummyInput } = require('../controllers/dummy');
 // const { createToken, join, refreshToken, kakaoLogin } = require('../controllers/auth');
 // const { verifyToken } = require("../middlewares");
 // const passport = require('passport');
