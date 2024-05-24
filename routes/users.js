@@ -7,7 +7,7 @@ const {getLoginedUser, getAllUsers, getUser, deleteUser,modifyUser, getPoint, mo
 const { verifyToken } = require("../middlewares");
 const { verify } = require('crypto');
 const { getNotification, modifyNotification, deleteNotification, uploadNotification } = require('../controllers/notification');
-
+const { getCalorie, uploadCalorie, deleteCalorie } = require('../controllers/calorie');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -52,5 +52,10 @@ router.get('/followings/:id', getFollowings);
 //포인트
 router.get('/point',verifyToken,getPoint);
 router.patch('/point',verifyToken,modifyPoint);
+
+// 칼로리
+router.get('/calorie',verifyToken, getCalorie);
+router.post('/calorie',verifyToken, uploadCalorie); //생성과 업데이트 둘다 가능
+router.delete('/calorie',verifyToken, deleteCalorie);
 
 module.exports = router;

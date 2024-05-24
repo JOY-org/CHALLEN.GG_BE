@@ -7,6 +7,9 @@ class Calorie extends Sequelize.Model{
                 type:Sequelize.INTEGER,
                 allownull:true,
                 defaultValue:0
+            },date: {
+                type: Sequelize.DATEONLY, // 날짜 필드 추가
+                allowNull: false
             }
         },{
             sequelize,
