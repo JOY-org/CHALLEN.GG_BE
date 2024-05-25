@@ -141,7 +141,7 @@ exports.likePost = async(req, res, next)=>{
             where:{id: req.body.id }
         });
         if (post) {
-            await post.addLikedPosts(req.user.id);   
+            await post.addLiker(req.user.id);   
             res.json({
                 code:200,
                 payload : post,
