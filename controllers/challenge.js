@@ -71,7 +71,7 @@ exports.interestChallenge = async(req, res, next)=>{
             where: {id:req.body.id}
         });
         if(challenge){
-            await challenge.addChallengeInterest(req.user.id);
+            await challenge.addInterester(req.user.id);
             res.json({
                 code:200,
                 payload: challenge,
@@ -95,7 +95,7 @@ exports.uninterestChallenge = async(req, res, next)=>{
             where: {id:req.user.id}
         });
         if(user){
-            await user.removeChallengeInterest(req.body.id); //챌린지 아이디를 지운다.
+            await user.removeInterestedChallenge(req.body.id); //챌린지 아이디를 지운다.
             res.json({
                 code:200,
                 message:"흥미있는 챌린지에서 삭제하였습니다."
@@ -105,6 +105,60 @@ exports.uninterestChallenge = async(req, res, next)=>{
                 code : 404,
                 message:"사용자를 찾을 수 없습니다."
             })
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.getInteresterByChallengeId=async(req,res,next)=>{
+    try {
+        const challenge = await Challenge.findOne({
+            where: { id: req.params.challengeId },
+            include: [{
+                model: User,
+                as: 'Interester'
+            }]
+        })
+        if (challenge) {
+            res.json({
+                code: 200,
+                payload: challenge.Interester,
+                message: "해당 챌린지를 흥미있어한 사용자 목록입니다."
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "해당 게시물을 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+}
+
+exports.getInterestByUserId=async(req,res,next)=>{
+    try {
+        const user = await User.findOne({
+            where: { id: req.params.userId },
+            include: [{
+                model: Challenge,
+                as: 'InterestedChallenge'
+            }]
+        })
+        if (user) {
+            res.json({
+                code: 200,
+                payload: user.InterestedChallenge,
+                message: "해당 사용자가 흥미있는 챌린지 목록입니다."
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "해당 사용자를 찾을 수 없습니다."
+            });
         }
     } catch (err) {
         console.error(err);

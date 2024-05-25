@@ -56,7 +56,7 @@ class User extends Sequelize.Model{
         //관계들어갈 곳
         db.User.hasMany(db.Calorie);
         db.User.hasMany(db.Cart);
-        db.User.belongsToMany(db.Challenge,{through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
+        db.User.belongsToMany(db.Challenge,{foreignKey:"UserId",as :'InterestedChallenge',through:'ChallengeInterest'}); //흥미있는 챌린지 테이블 생성
         db.User.hasMany(db.Check);
         db.User.hasMany(db.Enquiry);
         db.User.hasMany(db.Review);
