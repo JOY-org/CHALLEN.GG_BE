@@ -141,7 +141,7 @@ exports.likePost = async(req, res, next)=>{
             where:{id: req.body.id }
         });
         if (post) {
-            await post.addPostsLike(req.user.id);   
+            await post.addLikedPosts(req.user.id);   
             res.json({
                 code:200,
                 payload : post,
@@ -165,7 +165,7 @@ exports.unlikePost = async(req, res, next)=>{
             where:{id: req.user.id }
         });
         if (user){
-            await user.removePostsLike(req.body.id); // 게시글 아이디를 찾아 지운다.
+            await user.removeLikedPosts(req.body.id); // 게시글 아이디를 찾아 지운다.
             res.json({
                 code:200,
                 message:"좋아요를 취소하였습니다"

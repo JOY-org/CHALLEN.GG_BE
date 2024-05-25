@@ -65,7 +65,7 @@ class User extends Sequelize.Model{
         db.User.hasMany(db.Post);
         db.User.belongsToMany(db.User, { foreignKey: 'followingId', as: 'Followers', through: 'Follow' });
         db.User.belongsToMany(db.User, { foreignKey: 'followerId', as: 'Followings', through: 'Follow' });
-        db.User.belongsToMany(db.Post,{foreignKey:"UserId",through:'PostsLike'}); //PostsLike 테이블 생성
+        db.User.belongsToMany(db.Post,{foreignKey:"UserId",through:'PostsLike', as:'LikedPosts' }); //PostsLike 테이블 생성
         db.User.hasMany(db.Point);
         db.User.hasMany(db.Success);
     }
