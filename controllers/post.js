@@ -181,3 +181,59 @@ exports.unlikePost = async(req, res, next)=>{
         next(err);
     }
 }
+
+exports.getLikersByPostId = async (req, res, next) => {
+    try {
+        const post = await Post.findOne({
+            where: { id: req.params.postId },
+            include: [{
+                model: User,
+                as: 'Likers'
+            }]
+        });
+
+        if (post) {
+            res.json({
+                code: 200,
+                payload: post.Likers,
+                message: "해당 게시물을 좋아요한 사용자 목록입니다."
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "해당 게시물을 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+};
+
+exports.getLikedPostsByUserId = async (req, res, next) => {
+    try {
+        const user = await User.findOne({
+            where: { id: req.params.userId },
+            include: [{
+                model: Post,
+                as: 'LikedPosts'
+            }]
+        });
+
+        if (user) {
+            res.json({
+                code: 200,
+                payload: user.LikedPosts,
+                message: "해당 사용자가 좋아요한 게시물 목록입니다."
+            });
+        } else {
+            res.json({
+                code: 404,
+                message: "해당 사용자를 찾을 수 없습니다."
+            });
+        }
+    } catch (err) {
+        console.error(err);
+        next(err);
+    }
+};
