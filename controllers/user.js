@@ -34,24 +34,30 @@ exports.getAllUsers = async(req,res,next)=>{
         next(err)
     }
 }
-
-exports.modifyUser = async(req,res,next)=>{
+//이미지와 닉네임을 수정하는코드 
+exports.modifyUser = async (req, res, next) => {
     try {
-        await User.update({
-            ...req.body,
-            img: req.file ? `/uploads/user/${req.file.filename}` : '/uploads/user/default.png'
-        },{where:{id:req.user.id}}) //params가 아니라 토큰으로 찾은 user을 넘겨준다.
-        const user = await User.findOne({where:{id:req.user.id}});
+        let updateData = {};
+        if (req.body.nickname) {
+            updateData.nickname = req.body.nickname;
+        }
+        if (req.file) {
+            updateData.img = `/uploads/user/${req.file.filename}`;
+        }
+        await User.update(updateData, { where: { id: req.user.id } });
+
+        const user = await User.findOne({ where: { id: req.user.id } });
         res.json({
-            code:200,
-            message:'수정이 완료되었습니다',
-            img: user.img
-        })
+            code: 200,
+            message: '수정이 완료되었습니다',
+            img: user.img,
+            nickname: user.nickname
+        });
     } catch (err) {
         console.error(err);
-        next(err)
+        next(err);
     }
-}
+};
 
 exports.deleteUser = async (req,res,next)=>{
     try {
