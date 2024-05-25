@@ -188,7 +188,8 @@ exports.getLikersByPostId = async (req, res, next) => {
             where: { id: req.params.postId },
             include: [{
                 model: User,
-                as: 'Likers'
+                as: 'Likers',
+                attributes:['id']
             }]
         });
 
