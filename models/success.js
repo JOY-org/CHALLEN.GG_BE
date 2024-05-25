@@ -5,7 +5,8 @@ class Success extends Sequelize.Model{
         Success.init({
             success:{
                 type:Sequelize.BOOLEAN,
-                allowNull:false
+                allowNull:false,
+                defaultValue:false
             }
         },{
             timestamps:true,
