@@ -3,6 +3,11 @@ const Sequelize= require("sequelize");
 class Check extends Sequelize.Model{
     static initiate(sequelize){
         Check.init({
+            date:{
+                type:Sequelize.DATE,
+                allowNull:false,
+                defaultValue: Sequelize.NOW //현재 날짜를 기본값으로 둔다
+            },
             img:{
                 type:Sequelize.STRING(255),
                 allowNull:true,
@@ -18,8 +23,7 @@ class Check extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Check.belongsTo(db.User);
-        db.Check.belongsTo(db.Challenge);
+        db.Check.belongsTo(db.Success);
     }
 }
 

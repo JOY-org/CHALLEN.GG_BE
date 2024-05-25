@@ -3,7 +3,7 @@ const Sequelize= require("sequelize");
 class Success extends Sequelize.Model{
     static initiate(sequelize){
         Success.init({
-            Success:{
+            success:{
                 type:Sequelize.BOOLEAN,
                 allowNull:false
             }
@@ -18,6 +18,7 @@ class Success extends Sequelize.Model{
         //관계들어갈 곳
         db.Success.belongsTo(db.User)
         db.Success.belongsTo(db.Challenge)
+        db.Success.hasMany(db.Check);
     }
 }
 
