@@ -23,7 +23,7 @@ exports.createToken = (req, res, next) => {
                     },
                     process.env.JWT_SECRET,
                     // 1시간 후엔 expire
-                    {expiresIn: '5h', issuer: 'multi_project', subject:'accessToken'}
+                    {expiresIn: '1m', issuer: 'multi_project', subject:'accessToken'}
                 );
 
                 // token refresh
@@ -33,7 +33,7 @@ exports.createToken = (req, res, next) => {
                         nickname: user.nickname
                     },
                     process.env.JWT_SECRET,
-                    {expiresIn: '7d', issuer: 'multi_project', subject:'accessToken'}
+                    {expiresIn: '7d', issuer: 'multi_project', subject:'refreshToken'}
                 );
                 User.update({refreshToken}, {where: {id:user.id}});
                 if(err) {
@@ -44,7 +44,6 @@ exports.createToken = (req, res, next) => {
                     code:200,
                     message: '토근 발급 완료',
                     accessToken,
-                    refreshToken,
                     userid: user.id
                 });
             })
@@ -98,7 +97,7 @@ exports.refreshToken = async(req,res,next) =>{
         const newAccessToken = jwt.sign(
             { id: accessResult.id, nickname: accessResult.nickname},
             process.env.JWT_SECRET,
-            {expiresIn:'1h',issuer:"mini_project",subject:"accessToken"}
+            {expiresIn:'1h',issuer:"multi_project",subject:"accessToken"}
         )
 
         res.json({
