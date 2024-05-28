@@ -30,12 +30,12 @@ router.post('/', verifyToken, imgupload.single('img'), uploadPostAndImg);
 // router.post('/image', verifyToken, imgupload.single('img'), uploadImg); // 이미지 save저장과 이미지 url res에 담아 보내기
 router.get('/:commId', getPostByCommId); //카테고리에 맞는 전체찾기
 router.patch('/:postId', modifyPost); 
-router.delete('/:postId', deletePost);
 
 //개시글 좋아요
 router.post('/postlike',verifyToken, likePost);
 router.delete('/postlike', verifyToken, unlikePost);
-router.get('/postlike/likers/:postId', getLikersByPostId);
-router.get('/postlike/likePosts/:userId', getLikedPostsByUserId);
+router.get('/postlike/likers/:postId', verifyToken, getLikersByPostId);
+router.get('/postlike/likePosts/:userId', verifyToken, getLikedPostsByUserId);
 
+router.delete('/:postId', verifyToken, deletePost);
 module.exports = router;

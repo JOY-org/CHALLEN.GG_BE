@@ -23,7 +23,7 @@ exports.createToken = (req, res, next) => {
                     },
                     process.env.JWT_SECRET,
                     // 1시간 후엔 expire
-                    {expiresIn: '1m', issuer: 'multi_project', subject:'accessToken'}
+                    {expiresIn: '1h', issuer: 'multi_project', subject:'accessToken'}
                 );
 
                 // token refresh
@@ -201,3 +201,20 @@ exports.kakaoLogin = async(req, res, next)=>{
         return next(err);
     }
 }// 카카오 로그인
+
+// exports.delRefreshToken = async(req, res, next)=>{
+//     try{
+//         await User.update({
+//             refreshToken: null
+//         }, {
+//             where: {
+//                 id: req.body.id
+//             }
+//         });
+//         res.json({
+//             code: 200
+//         })
+//     } catch(err){
+//         return next(err);
+//     }
+// }

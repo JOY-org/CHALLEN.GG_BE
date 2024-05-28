@@ -1,11 +1,17 @@
 {
   "development": {
     "username": "root",
-    "password": "0000",
+    "password": "1234",
     "database": "multi_project",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "timezone" : "+09:00"
+    "timezone": "+09:00",
+    "dialectOptions": {
+      "charset": "utf8mb4",
+      "dateStrings": true,
+      "typeCast": true
+    }
+    
   },
   "test": {
     "username": "root",

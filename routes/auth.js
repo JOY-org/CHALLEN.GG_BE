@@ -1,5 +1,5 @@
 const express = require('express');
-const { createToken, googleLogin, kakaoLogin,join, refreshToken } = require('../controllers/auth');
+const { delRefreshToken, createToken, googleLogin, kakaoLogin,join, refreshToken } = require('../controllers/auth');
 const router = express.Router();
 const passport = require('passport')
 
@@ -12,6 +12,7 @@ router.post('/join', join);
 // // POST /v1/auth/login
 router.post('/login', createToken);
 router.post('/refresh', refreshToken);
+// router.patch('/refresh', delRefreshToken);
 
 // /v1/auth/google
 router.get('/google',passport.authenticate('google'))
