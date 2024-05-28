@@ -17,8 +17,8 @@ class Success extends Sequelize.Model{
     }
     static associate(db){
         //관계들어갈 곳
-        db.Success.belongsTo(db.User)
-        db.Success.belongsTo(db.Challenge)
+        db.Success.belongsTo(db.User);
+        db.Success.belongsTo(db.Challenge);
         db.Success.hasMany(db.Check);
     }
 }

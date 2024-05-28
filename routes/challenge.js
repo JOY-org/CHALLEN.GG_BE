@@ -5,6 +5,9 @@ const path=require('path')
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 const {getChallenge, uploadChallenge, modifyChallenge, deleteChallenge, interestChallenge, uninterestChallenge, getInteresterByChallengeId, getInterestByUserId}=require('../controllers/challenge');
 const { verifyToken } = require("../middlewares");
+const { getCheckByChallengeId, getCheck, uploadCheck, deleteCheck, getCheckByUserId } = require('../controllers/check');
+const { getSuccess, uploadSuccess, deleteSuccess } = require('../controllers/success');
+const { verify } = require('crypto');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -31,6 +34,15 @@ router.post('/interestchallenge',verifyToken, interestChallenge);
 router.delete('/interestchallenge', verifyToken, uninterestChallenge);
 router.get('/interestchallenge/interester/:postId', getInteresterByChallengeId);
 router.get('/interestchallenge/interestedchallenge/:userId', getInterestByUserId);
+
+router.get('/success',verifyToken,getSuccess);
+router.post('/success',verifyToken,uploadSuccess);
+router.delete('/success',verifyToken,deleteSuccess)
+
+router.get('/check/challenge/:challengeId',getCheckByChallengeId);
+router.get('/check/user/:userId',getCheckByUserId);
+router.post('/check', uploadCheck);
+router.delete('/check/:checkId',deleteCheck)
 
 
 module.exports = router;
