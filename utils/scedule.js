@@ -13,7 +13,7 @@ const successCheck = schedule.scheduleJob('0 0 0 * * *', async() => {
             const challenge = await Challenge.findOne({
                 where : {Id : success.ChallengeId}
             })
-            if ( checkout>= challenge.duration){
+            if ( checkout>= challenge.duration){ 
                 await success.update({success:true})
             }
         }
