@@ -13,7 +13,7 @@ exports.getPurchased = async(req,res,next)=>{
     }
 }
 
-exports.createPurchased = async(req,res,next) =>{
+exports.uploadPurchased = async(req,res,next) =>{
     try {
         const purchased = await Purchased.create({
             count : req.body.count,

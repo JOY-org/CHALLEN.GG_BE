@@ -7,7 +7,7 @@ const {getReview, modifyReview, deleteReview,uploadReview} =require('../controll
 const {getCart, modifyCart, deleteCart, uploadCart}=require('../controllers/cart')
 const { getEnquiry, uploadEnquiry, modifyEnquiry, deleteEnquiry } =require('../controllers/enquiry');
 const { getProduct,deleteProduct, modifyProduct, uploadProduct } = require('../controllers/product');
-const { getPurchased, deletePurchased,createPurchased } = require('../controllers/purchased');
+const { getPurchased, deletePurchased, uploadPurchased } = require('../controllers/purchased');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -39,7 +39,7 @@ router.delete('/cart/:productId',verifyToken, deleteCart)
 
 // /products/purchased/:userid -> userid 부분 다 미들웨어로 교체해야한다.
 router.get('/purchased/', verifyToken, getPurchased)
-router.post('/purchased/:productId', verifyToken, createPurchased)
+router.post('/purchased/:productId', verifyToken, uploadPurchased)
 router.delete('/purchased/:productId', verifyToken, deletePurchased)
 // 구매목록은 수정은 없다 -> 삭제와 등록만 있다
 

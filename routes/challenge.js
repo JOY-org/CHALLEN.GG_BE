@@ -41,7 +41,7 @@ router.delete('/success',verifyToken,deleteSuccess)
 
 router.get('/check/challenge/:challengeId',getCheckByChallengeId);
 router.get('/check/user/:userId',getCheckByUserId);
-router.post('/check', uploadCheck);
+router.post('/check',  imgupload.single('img'),uploadCheck);
 router.delete('/check/:checkId',deleteCheck)
 
 
