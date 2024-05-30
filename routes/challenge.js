@@ -26,9 +26,8 @@ const imgupload=multer({
 }) // 챌린지 대표사진
 
 router.get('/', getChallenge);
-router.post('/', verifyToken, imgupload.single('img'), uploadChallenge); 
-router.patch('/:challengeId',modifyChallenge);
-router.delete('/:challengeId', deleteChallenge);
+router.post('/', verifyToken, imgupload.single('img'), uploadChallenge);
+
 
 router.post('/interestchallenge',verifyToken, interestChallenge);
 router.delete('/interestchallenge', verifyToken, uninterestChallenge);
@@ -44,5 +43,7 @@ router.get('/check/user/:userId',getCheckByUserId);
 router.post('/check',  imgupload.single('img'),uploadCheck);
 router.delete('/check/:checkId',deleteCheck)
 
+router.patch('/:challengeId',modifyChallenge);
+router.delete('/:challengeId', deleteChallenge);
 
 module.exports = router;
