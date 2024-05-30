@@ -10,7 +10,7 @@ class Challenge extends Sequelize.Model{
             img:{
                 type:Sequelize.STRING(255),
                 allowNull:true,
-                defaultValue:"기본 이미지 경로"
+                defaultValue:"/uploads/challenge/default.png"
             },
             startDay:{
                 type:Sequelize.DATEONLY,
