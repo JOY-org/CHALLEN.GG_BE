@@ -24,7 +24,10 @@ exports.uploadComment = async(req,res,next)=>{
         const comment = await Comment.create({
             UserId:req.user.id,
             PostId:req.body.postId,
-            content:req.body.content
+            content:req.body.content,            
+            include:{
+                model: User
+            }
         })
         res.json({
             code:200,
