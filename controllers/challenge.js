@@ -1,14 +1,11 @@
-const {Challenge, User} = require('../models');
+const {Challenge, User, ChallengeInterest} = require('../models');
 const op = require('sequelize').Op;
 // 컨트롤러 js
 
 exports.getChallenge = async(req,res,next)=>{
     try {
         const challenge = await Challenge.findAll({
-            order:[['createdAt','DESC']],
-            include:{
-                model:ChallengeInterest
-            }
+            order:[['createdAt','DESC']]
         })
         res.json({
             code:200,
