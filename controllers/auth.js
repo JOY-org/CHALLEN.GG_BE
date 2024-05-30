@@ -23,7 +23,7 @@ exports.createToken = (req, res, next) => {
                     },
                     process.env.JWT_SECRET,
                     // 1시간 후엔 expire
-                    {expiresIn: '1h', issuer: 'multi_project', subject:'accessToken'}
+                    {expiresIn: '5m', issuer: 'multi_project', subject:'accessToken'}
                 );
 
                 // token refresh
