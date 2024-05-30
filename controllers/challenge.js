@@ -5,7 +5,10 @@ const op = require('sequelize').Op;
 exports.getChallenge = async(req,res,next)=>{
     try {
         const challenge = await Challenge.findAll({
-            order:[['createdAt','DESC']]
+            order:[['createdAt','DESC']],
+            include:{
+                model:ChallengeInterest
+            }
         })
         res.json({
             code:200,

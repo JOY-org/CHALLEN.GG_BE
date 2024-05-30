@@ -33,6 +33,8 @@ class Post extends Sequelize.Model{
         //관계들어갈 곳
         db.Post.belongsTo(db.User)
         db.Post.belongsToMany(db.User, {as:'Likers', through: 'PostsLike' }) //Posts 테이블 생성
+        
+        db.Post.hasMany(db.Comment)
     }
 }
 module.exports=Post;
