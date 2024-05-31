@@ -22,6 +22,7 @@
 - **Database** : MySQLDB
 
 <br/>
+
 ## 🙋‍♂️ Developer
 
 |                                          Frontend(Leader)                                           |                                         Frontend                                          |                                         Frontend                                          |                                         Backend                                         |                                           Backend                                           |            
