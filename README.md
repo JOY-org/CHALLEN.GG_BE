@@ -2,6 +2,7 @@
 <h3 align="middle">운동 시작 부터 건강 관리 까지 한 번에 시작 가능한 Challen.GG </h3>
 
 <br/>
+
 ## 📁자료구조
 ```
 ├─ .nvmrc
@@ -16,6 +17,7 @@
 ├─ package.json
 ├─ README.md
 ```
+
 ## 🔧 Stack
 **Backend**
 - **Language** : JavaScript 
