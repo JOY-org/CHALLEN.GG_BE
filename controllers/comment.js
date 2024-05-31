@@ -6,7 +6,8 @@ exports.getComment = async(req,res,next)=>{
             where : {PostId:req.params.postId},
             include:{
                 model: User
-            }
+            },
+            order: [['createdAt', 'DESC']]
         })
         res.json({
             code: 200,
