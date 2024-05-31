@@ -21,10 +21,13 @@ exports.getComment = async(req,res,next)=>{
 
 exports.uploadComment = async(req,res,next)=>{
     try {
-        const comment = await Comment.create({
+        await Comment.create({
             UserId:req.user.id,
             PostId:req.body.postId,
             content:req.body.content,            
+        })
+        const comment = await Comment.findAll({
+            where:{PostId:req.body.postId},
             include:{
                 model: User
             }
