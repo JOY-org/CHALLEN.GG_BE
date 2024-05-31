@@ -27,8 +27,9 @@ exports.uploadSuccess = async(req,res,next) =>{
     try {
         const success= await Success.create({
             UserId:req.user.id,
-            Challenge: req.body.challengeId
+            ChallengeId: req.body.id
         })
+
         res.json({
             code:200,
             payload: success,

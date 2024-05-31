@@ -67,8 +67,7 @@ exports.deleteComment = async(req,res,next)=>{
     try {
         await Comment.destroy({
             where:{
-                UserId: req.user.id,
-                PostId: req.params.postId
+                id: req.body.id
             }
         })
         res.json({
