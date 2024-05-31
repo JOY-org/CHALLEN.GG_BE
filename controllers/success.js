@@ -2,8 +2,15 @@ const { Check, Success, Challenge, User  } = require('../models');
 
 exports.getSuccess = async(req,res,next) =>{
     try {
+        let condition = {}
+        if (req.query?.id) {
+            condition = {ChallengeId: req.query.id}
+        }
         const success= await Success.findAll({
-            where :{UserId:req.user.id}
+            where :{
+                UserId:req.user.id,
+                ...condition
+            }
         }) //user가 참여한 모든 챌린지와 그 챌린지 아이디를 확인 할 수 있는 컨트롤러
         res.json({
             code:200,
@@ -20,8 +27,9 @@ exports.uploadSuccess = async(req,res,next) =>{
     try {
         const success= await Success.create({
             UserId:req.user.id,
-            ChallengeId: req.body.challengeId
-        }) 
+            ChallengeId: req.body.id
+        })
+
         res.json({
             code:200,
             payload: success,
@@ -36,9 +44,9 @@ exports.uploadSuccess = async(req,res,next) =>{
 exports.deleteSuccess = async(req,res,next) =>{
     try {
         const success= await Success.destroy({
-            where : 
-            {UserId:req.user.id, Challenge: req.body.challengeId}
-        }) 
+            where :
+            {UserId:req.user.id, ChallengeId: req.body.challengeId}
+        })
         res.json({
             code:200,
             payload: success,
