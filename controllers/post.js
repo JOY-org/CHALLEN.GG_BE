@@ -1,4 +1,4 @@
-const { Post ,User } = require('../models');
+const { Post ,User,Comment } = require('../models');
 const op = require('sequelize').Op;
 const sequelize = require('sequelize');
 // 컨트롤러 js
@@ -13,6 +13,8 @@ exports.getPostByCommId = async (req, res, next) => {
                 model: User,
                 as: 'Likers',
                 attributes: ['id']
+            },{
+                model:Comment
             }],
             where: {
                 category: req.params.commId
