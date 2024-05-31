@@ -18,7 +18,7 @@ module.exports = () =>{
                 done(null,exUser);
             } else{
                 const newUser = await User.create({
-                    nickname : profile.nickname, //제공은 nickname 인데 강사님과 다른이유
+                    nickname : profile.displayName,
                     kakaoid: profile.id, 
                     provider:'kakao'
                 });
@@ -26,7 +26,7 @@ module.exports = () =>{
             }
         }catch(err){
             console.error(err);
-            document(err);
+            done(err);
         }
     }));
 }
