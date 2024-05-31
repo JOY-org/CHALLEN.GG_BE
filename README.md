@@ -40,7 +40,6 @@ Challen.GG_BE
 │  ├─ review.js
 │  ├─ success.js
 │  └─ user.js
-├─ package-lock.json
 ├─ package.json
 ├─ passport
 │  ├─ google.js
