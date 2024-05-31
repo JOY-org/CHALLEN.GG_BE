@@ -1,4 +1,3 @@
-# Challen.GG_BE
 <h1 align="middle">Challen.GG_BE</h1>
 <h3 align="middle">운동 시작 부터 건강 관리 까지 한 번에 시작 가능한 Challen.GG </h3>
 
