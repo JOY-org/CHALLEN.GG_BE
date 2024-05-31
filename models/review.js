@@ -10,7 +10,7 @@ class Review extends Sequelize.Model{
         },{
             timestamps:true,
             sequelize,
-            charset: "utf8",
+            charset: "utf8mb4",
             collate: "utf8_general_ci",
         })
     }

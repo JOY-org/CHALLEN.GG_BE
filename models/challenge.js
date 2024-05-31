@@ -41,8 +41,8 @@ class Challenge extends Sequelize.Model{
             timestamps:true,
             sequelize,
             paranoid: true,
-            charset: "utf8",
-            collate: "utf8_general_ci"
+            charset: "utf8mb4",
+            collate: "utf8_general_ci",
         })
     }
     static associate(db){

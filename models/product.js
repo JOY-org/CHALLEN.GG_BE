@@ -36,7 +36,7 @@ class Product extends Sequelize.Model{
             timestamps:false,
             sequelize,
             paranoid: false,
-            charset: "utf8",
+            charset: "utf8mb4",
             collate: "utf8_general_ci",
         });
     }

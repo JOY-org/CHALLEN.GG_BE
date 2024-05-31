@@ -48,8 +48,8 @@ class User extends Sequelize.Model{
             sequelize,
             paranoid: true,
             //paranoid :deletedAt 생성, true 때문에 완전 삭제가 되는것이 아니라 삭제된 시간이 뜬다.
-            charset: "utf8",
-            collate: "utf8_general_ci"
+            charset: "utf8mb4",
+            collate: "utf8_general_ci",
         })
     }
     static associate(db){

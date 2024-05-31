@@ -25,7 +25,7 @@ class Post extends Sequelize.Model{
             timestamps:true,
             sequelize,
             paranoid: true,
-            charset: "utf8",
+            charset: "utf8mb4",
             collate: "utf8_general_ci",
         })
     }

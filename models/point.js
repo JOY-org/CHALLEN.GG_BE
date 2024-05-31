@@ -10,7 +10,7 @@ class Point extends Sequelize.Model{
             }
         },{
                 sequelize,
-                charset: "utf8",
+                charset: "utf8mb4",
                 collate: "utf8_general_ci",
         })
     }
