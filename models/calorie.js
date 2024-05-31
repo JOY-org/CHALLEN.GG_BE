@@ -15,7 +15,7 @@ class Calorie extends Sequelize.Model{
             sequelize,
             timestamps:true,
             charset: "utf8mb4",
-            collate: "utf8_general_ci",
+            collate: "utf8mb4_general_ci",
         })
     }
     static associate(db){

@@ -11,7 +11,7 @@ class Notification extends Sequelize.Model{
             timestamps:true,
             sequelize,
             charset: "utf8mb4",
-            collate: "utf8_general_ci",
+            collate: "utf8mb4_general_ci",
         })
     }
     static associate(db){
