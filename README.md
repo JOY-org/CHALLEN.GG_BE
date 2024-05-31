@@ -1,7 +1,7 @@
 # Challen.GG_BE
 멀티잇 react 팀프로젝트 BE
 부족하지만 잘 부탁 드립니다
-## 자료구조
+## 📁자료구조
 ```
 ├─ .nvmrc
 ├─ app.js
@@ -14,9 +14,14 @@
 ├─ utils/
 ├─ package.json
 ├─ README.md
-
-
 ```
+## 🔧 Stack
+**Backend**
+- **Language** : JavaScript 
+- **Library & Framework** : Node.js
+- **Database** : MySQLDB
+
+<br/>
 ## 🙋‍♂️ Developer
 
 |                                          Frontend(Leader)                                           |                                         Frontend                                          |                                         Frontend                                          |                                         Backend                                         |                                           Backend                                           |            
