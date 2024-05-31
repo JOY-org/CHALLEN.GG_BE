@@ -1,6 +1,8 @@
 # Challen.GG_BE
-멀티잇 react 팀프로젝트 BE
-부족하지만 잘 부탁 드립니다
+<h1 align="middle">Challen.GG_BE</h1>
+<h3 align="middle">운동 시작 부터 건강 관리 까지 한 번에 시작 가능한 Challen.GG </h3>
+
+<br/>
 ## 📁자료구조
 ```
 ├─ .nvmrc
