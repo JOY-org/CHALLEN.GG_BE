@@ -7,7 +7,7 @@ exports.getComment = async(req,res,next)=>{
             include:{
                 model: User
             },
-            order: [['createdAt', 'DESC']]
+            order: [['createdAt', 'ASC']]
         })
         res.json({
             code: 200,
