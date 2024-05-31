@@ -134,3 +134,4 @@ config/
 
 # for ignore root password
 config/
+config/config.json

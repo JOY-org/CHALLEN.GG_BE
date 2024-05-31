@@ -5,6 +5,7 @@ const path=require('path');
 // require('../controllers/~~') 에서 필요한 거 가져와서 넣기
 const { verifyToken } = require("../middlewares");
 const {getPost, getPostByCommId, uploadPost, deletePost, modifyPost, uploadImg, uploadPostAndImg, likePost, unlikePost, getLikersByPostId, getLikedPostsByUserId }=require('../controllers/post');
+const { getComment, uploadComment, modifyComment, deleteComment } = require('../controllers/comment');
 
 const storage = multer.diskStorage({
     destination(req,file,cb){
@@ -31,11 +32,18 @@ router.post('/', verifyToken, imgupload.single('img'), uploadPostAndImg);
 router.get('/:commId', getPostByCommId); //카테고리에 맞는 전체찾기
 router.patch('/:postId', modifyPost); 
 
-//개시글 좋아요
+//게시글 좋아요
 router.post('/postlike',verifyToken, likePost);
 router.delete('/postlike', verifyToken, unlikePost);
 router.get('/postlike/likers/:postId', verifyToken, getLikersByPostId);
 router.get('/postlike/likePosts/:userId', verifyToken, getLikedPostsByUserId);
+
+//게시글 댓글
+router.get('/comment/:postId', getComment);
+router.post('/comment',verifyToken,uploadComment);
+router.patch('/comment/:postId',verifyToken,modifyComment);
+router.delete('/commment/:postId',verifyToken,deleteComment);
+
 
 router.delete('/:postId', verifyToken, deletePost);
 module.exports = router;

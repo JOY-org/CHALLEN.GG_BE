@@ -1,15 +1,21 @@
-const { Post ,User} = require('../models');
+const { Post ,User,Comment } = require('../models');
 const op = require('sequelize').Op;
+const sequelize = require('sequelize');
 // 컨트롤러 js
 
 exports.getPostByCommId = async (req, res, next) => {
     try {
         const posts = await Post.findAll({
             order: [['createdAt', 'DESC']],
-            include: {
+            include: [{
+                model: User
+            },{
                 model: User,
-                attributes: ['nickname', 'img']
-            },
+                as: 'Likers',
+                attributes: ['id']
+            },{
+                model:Comment
+            }],
             where: {
                 category: req.params.commId
             }

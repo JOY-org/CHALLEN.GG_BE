@@ -25,14 +25,16 @@ class Post extends Sequelize.Model{
             timestamps:true,
             sequelize,
             paranoid: true,
-            charset: "utf8",
-            collate: "utf8_general_ci",
+            charset: "utf8mb4",
+            collate: "utf8mb4_general_ci",
         })
     }
     static associate(db){
         //관계들어갈 곳
         db.Post.belongsTo(db.User)
         db.Post.belongsToMany(db.User, {as:'Likers', through: 'PostsLike' }) //Posts 테이블 생성
+        
+        db.Post.hasMany(db.Comment)
     }
 }
 module.exports=Post;
