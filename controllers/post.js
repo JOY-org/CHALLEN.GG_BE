@@ -81,7 +81,7 @@ exports.uploadPostAndImg = async (req, res, next) => {
             title: req.body.title,
             content: req.body.content,
             category: req.body.category,
-            img: req.file ? `/uploads/post/${req.file.filename}` : null,
+            img: req.file ? `/uploads/post/${req.file.filename}` : `/uploads/post/default.png`,
             UserId: req.user.id,
         });
         const result = await Post.findOne({
