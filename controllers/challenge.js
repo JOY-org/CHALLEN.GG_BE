@@ -27,7 +27,12 @@ exports.uploadChallenge = async(req,res,next)=>{
         const start = req.body.startDay
         const end = req.body.endDay
         const challenge = await Challenge.create({
-            ...req.body,
+            name: req.body.name,
+            startDay: req.body.startDay,
+            endDay: req.body.endDay,
+            comment: req.body.comment,
+            caution: req.body.caution,
+            point: req.body.point,
             UserId:req.user.id,
             img: req.file ? `/uploads/challenge/${req.file.filename}` : "빈 이미지",
             duration: Math.floor((end - start) / (1000 * 60 * 60 * 24))
