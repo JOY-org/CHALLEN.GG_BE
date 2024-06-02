@@ -41,6 +41,11 @@ class Challenge extends Sequelize.Model{
                 type: Sequelize.INTEGER,
                 allowNull:false,
                 defaultValue:20
+            },
+            number:{
+                type: Sequelize.INTEGER,
+                allowNull:false,
+                defaultValue:0
             }
         },{
             timestamps:true,
