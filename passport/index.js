@@ -45,7 +45,7 @@ module.exports =()=> {
             done(null,user);
         })
         .catch(err=>{
-
+            console.log(err);
         })
     })
     // -> 스켈레톤에서는 팔로우와 팔로잉을 가져왔는데 우리꺼에서는 무엇을 가져와야 하는지 의논 필요/ 알림과 포인트 까지는 가져와야 할것 같다.

@@ -196,8 +196,9 @@ exports.kakaoLogin = async(req, res, next)=>{
                 })
                 res.status(302).redirect(process.env.CLIENT_URL)
             })
-        })
+        })(req,res,next)
     } catch(err){
+        console.log(err);
         return next(err);
     }
 }// 카카오 로그인
