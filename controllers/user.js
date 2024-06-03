@@ -85,7 +85,7 @@ exports.follow = async (req, res, next) => {
             // me follower you following
             await user.addFollowers(req.user.id);
             await Notification.create({
-                content: `${req.user.nickname}님 당신을 follow`,
+                content: `${req.user.nickname}님 당신을 팔로우했습니다 q(≧▽≦q)`,
                 UserId: req.body.id
             })
             res.json({
@@ -113,6 +113,10 @@ exports.unfollow = async (req, res, next) => {
         });
         if (user) {
             await user.removeFollowings(req.body.id);
+            await Notification.create({
+                content: `${req.user.nickname}님 당신을 언팔로우했습니다 (┬┬﹏┬┬)`,
+                UserId: req.body.id
+            })
             res.json({
                 code: 200,
                 message: "언팔로우 되었습니다."
