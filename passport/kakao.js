@@ -10,7 +10,8 @@ module.exports = () =>{
         try{
             const exUser = await User.findOne({
                 where:{  
-                    kakaoid:profile.id, //카카오에서 제공하는것과 비교해서 찾아보아야 한다.
+                    id:profile.id, //카카오에서 제공하는것과 비교해서 찾아보아야 한다.
+                    kakaoid: profile.id,
                     provider:'kakao'
                 }
             });
@@ -19,7 +20,8 @@ module.exports = () =>{
             } else{
                 const newUser = await User.create({
                     nickname : profile.displayName,
-                    kakaoid: profile.id, 
+                    id: profile.id,
+                    kakaoid: profile.id,
                     provider:'kakao'
                 });
                 done(null, newUser)
