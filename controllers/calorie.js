@@ -19,19 +19,19 @@ exports.getCalorie = async(req,res,next) =>{
 
 exports.uploadCalorie = async (req, res, next) => {
     try {
-        const { date, calories } = req.body;
-        
+        const { date, sum } = req.body;
+
         // 주어진 날짜와 사용자에 대한 칼로리 항목이 이미 존재하는지 확인
         const existingCalorie = await Calorie.findOne({
             where: {
-                userId: req.user.id,
+                UserId: req.user.id,
                 date: date
             }
         });
 
         if (existingCalorie) {
             // 이미 항목이 존재하는 경우 업데이트
-            existingCalorie.calories = calories;
+            existingCalorie.sum = sum;
             await existingCalorie.save();
             res.json({
                 code: 200,
@@ -41,9 +41,9 @@ exports.uploadCalorie = async (req, res, next) => {
         } else {
             // 항목이 존재하지 않는 경우 새로 생성
             const newCalorie = await Calorie.create({
-                userId: req.user.id,
+                UserId: req.user.id,
                 date: date,
-                calories: calories
+                sum: sum
             });
             res.json({
                 code: 200,

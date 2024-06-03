@@ -34,7 +34,7 @@ const storage1 = multer.diskStorage({
     }
 })
 const imgupload1=multer({
-    storage1,
+    storage: storage1,
     limits
 }) // check 대표사진
 
@@ -53,7 +53,7 @@ router.delete('/success',verifyToken,deleteSuccess)
 
 router.get('/check/challenge/:challengeId',getCheckByChallengeId);
 router.get('/check/user/:userId',getCheckByUserId);
-router.post('/check',  imgupload1.single('img'),uploadCheck);
+router.post('/check', imgupload1.single('img'), uploadCheck);
 router.delete('/check/:checkId',deleteCheck)
 
 router.patch('/:challengeId',modifyChallenge);

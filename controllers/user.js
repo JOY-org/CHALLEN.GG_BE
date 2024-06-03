@@ -1,4 +1,4 @@
-const {User} = require('../models');
+const {User, Notification} = require('../models');
 const Point = require('../models/point');
 const op = require('sequelize').Op;
 // 컨트롤러 js
@@ -34,7 +34,7 @@ exports.getAllUsers = async(req,res,next)=>{
         next(err)
     }
 }
-//이미지와 닉네임을 수정하는코드 
+//이미지와 닉네임을 수정하는코드
 exports.modifyUser = async (req, res, next) => {
     try {
         let updateData = {};
@@ -84,6 +84,10 @@ exports.follow = async (req, res, next) => {
         if (user) {
             // me follower you following
             await user.addFollowers(req.user.id);
+            await Notification.create({
+                content: `${req.user.nickname}님 당신을 follow`,
+                UserId: req.body.id
+            })
             res.json({
                 code: 200,
                 message: "팔로우 되었습니다."
