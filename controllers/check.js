@@ -57,7 +57,7 @@ exports.uploadCheck = async(req, rex,next)=>{
     try {
         const check = await Check.create({
             img: req.file ? `/uploads/check/${req.file.filename}` : "빈 이미지",
-            date: req.body.date,
+            date: new Date(),
             SuccessId : req.body.SuccessId
         })
         res.json({
