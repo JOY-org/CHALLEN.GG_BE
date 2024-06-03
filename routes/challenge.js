@@ -26,7 +26,7 @@ const imgupload=multer({
 }) // 챌린지 대표사진
 const storage1 = multer.diskStorage({
     destination(req,file,cb){
-        cb(null,'public/uploads/challenge')
+        cb(null,'public/uploads/check')
     },
     filename(req,file, cb){
         const ext = path.extname(file.originalname)

@@ -53,7 +53,7 @@ exports.getCheckByUserId = async (req,res,next) =>{
     }
 }
 
-exports.uploadCheck = async(req, rex,next)=>{
+exports.uploadCheck = async(req, res,next)=>{
     try {
         const check = await Check.create({
             img: req.file ? `/uploads/check/${req.file.filename}` : "빈 이미지",
