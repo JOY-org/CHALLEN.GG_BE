@@ -4,7 +4,7 @@ const op = require('sequelize').Op;
 exports.getCalorie = async(req,res,next) =>{
     try {
         const calorie =await Calorie.findAll({
-            where:{id:req.user.id}
+            where:{UserId:req.user.id}
         })
         res.json({
             code:200,
