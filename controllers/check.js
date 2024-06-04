@@ -1,7 +1,7 @@
 const { Check, Success, Challenge, User  } = require('../models');
 
 // (도전별 체크 조회)
-// select chk.id, chk.img, s.UserId, clg.id 
+// select chk.id, chk.img, s.UserId, clg.id
 // from checks chk
 // left join successes s on s.id = chk.SuccessId
 // left join challenges clg on clg.id = s.ChallengeId;
@@ -71,7 +71,7 @@ exports.uploadCheck = async(req, res,next)=>{
     }
 }
 
-exports.deleteCheck = async(req, rex,next)=>{
+exports.deleteCheck = async(req, res,next)=>{
     try {
         await Check.destroy({
             where:{id : req.params.checkId}
