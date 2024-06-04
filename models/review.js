@@ -16,6 +16,11 @@ class Review extends Sequelize.Model{
                 allowNull:false,
                 defaultValue:"이미지 주소",
             },
+            star:{
+                type : Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 3
+            }
         },{
             timestamps:true,
             sequelize,
