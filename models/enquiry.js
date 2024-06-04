@@ -6,7 +6,16 @@ class Enquiry extends Sequelize.Model{
             title:{
                 type:Sequelize.STRING(25),
                 allowNull:false
-            }
+            },
+            content:{
+                type: Sequelize.TEXT,
+                allowNull: true
+            },
+            img:{
+                type:Sequelize.STRING(200),
+                allowNull:false,
+                defaultValue:"이미지 주소",
+            },
         },{
             timestamps:true,
             sequelize,
