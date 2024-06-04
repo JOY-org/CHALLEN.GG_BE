@@ -24,12 +24,12 @@ module.exports =()=> {
                 {
                     model:User,
                     attribute:['id','nickname'],
-                    as:'Follwers'
+                    as:'Followers'
                 },
                 {
                     model:User,
                     attribute:['id','nickname'],
-                    as:'Follwings'
+                    as:'Followings'
                 },
                 {
                     model:Point,
