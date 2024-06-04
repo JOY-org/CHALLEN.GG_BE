@@ -26,8 +26,8 @@
   ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 - **Database** : ![MySQL](https://img.shields.io/badge/mysql-4479A1.svg?style=for-the-badge&logo=mysql&logoColor=white)
 
-<br/>
 
+<br /> 
 ## 🙋‍♂️ Developer
 
 |                                          Frontend(Leader)                                           |                                         Frontend                                          |                                         Frontend                                          |                                         Backend                                         |                                           Backend                                           |            
