@@ -4,7 +4,7 @@ class Product extends Sequelize.Model{
     static initiate(sequelize){
         Product.init({
             img:{
-                type:Sequelize.STRING(200),
+                type:Sequelize.TEXT,
                 allowNull:false,
                 defaultValue:"이미지 주소",
             },
