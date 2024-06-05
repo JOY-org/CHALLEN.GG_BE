@@ -36,6 +36,16 @@ class Challenge extends Sequelize.Model{
             duration: { //end day start day 를 이용한 기간 을 넣는다.
                 type: Sequelize.INTEGER,
                 allowNull:false
+            },
+            max:{
+                type: Sequelize.INTEGER,
+                allowNull:false,
+                defaultValue:20
+            },
+            number:{
+                type: Sequelize.INTEGER,
+                allowNull:false,
+                defaultValue:0
             }
         },{
             timestamps:true,

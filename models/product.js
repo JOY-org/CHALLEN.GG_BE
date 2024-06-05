@@ -31,6 +31,10 @@ class Product extends Sequelize.Model{
                 type:Sequelize.TEXT,
                 allowNull:false,
                 defaultValue:"물품 설명"
+            },
+            star:{
+                type : Sequelize.INTEGER,
+                allowNull: false,
             }
         },{
             timestamps:false,

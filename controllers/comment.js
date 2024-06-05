@@ -31,7 +31,8 @@ exports.uploadComment = async(req,res,next)=>{
             where:{PostId:req.body.postId},
             include:{
                 model: User
-            }
+            },
+            order: [['createdAt', 'DESC']]
         })
         res.json({
             code:200,

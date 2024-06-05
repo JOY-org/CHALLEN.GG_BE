@@ -24,6 +24,19 @@ const imgupload=multer({
     storage,
     limits
 }) // 챌린지 대표사진
+const storage1 = multer.diskStorage({
+    destination(req,file,cb){
+        cb(null,'public/uploads/check')
+    },
+    filename(req,file, cb){
+        const ext = path.extname(file.originalname)
+        cb(null, path.basename(file.originalname,ext)+Date.now()+ext)
+    }
+})
+const imgupload1=multer({
+    storage: storage1,
+    limits
+}) // check 대표사진
 
 router.get('/', getChallenge);
 router.post('/', verifyToken, imgupload.single('img'), uploadChallenge);
@@ -40,7 +53,7 @@ router.delete('/success',verifyToken,deleteSuccess)
 
 router.get('/check/challenge/:challengeId',getCheckByChallengeId);
 router.get('/check/user/:userId',getCheckByUserId);
-router.post('/check',  imgupload.single('img'),uploadCheck);
+router.post('/check', imgupload1.single('img'), uploadCheck);
 router.delete('/check/:checkId',deleteCheck)
 
 router.patch('/:challengeId',modifyChallenge);

@@ -10,6 +10,9 @@ exports.getSuccess = async(req,res,next) =>{
             where :{
                 UserId:req.user.id,
                 ...condition
+            },
+            include:{
+                model : Challenge
             }
         }) //user가 참여한 모든 챌린지와 그 챌린지 아이디를 확인 할 수 있는 컨트롤러
         res.json({

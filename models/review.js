@@ -6,6 +6,20 @@ class Review extends Sequelize.Model{
             title:{
                 type:Sequelize.STRING(25),
                 allowNull:false
+            },
+            content:{
+                type: Sequelize.TEXT,
+                allowNull: true
+            },
+            img:{
+                type:Sequelize.STRING(200),
+                allowNull:false,
+                defaultValue:"이미지 주소",
+            },
+            star:{
+                type : Sequelize.INTEGER,
+                allowNull: false,
+                defaultValue: 3
             }
         },{
             timestamps:true,

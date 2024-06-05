@@ -1,6 +1,4 @@
 const {Challenge, User, ChallengeInterest} = require('../models');
-const op = require('sequelize').Op;
-// 컨트롤러 js
 
 exports.getChallenge = async(req,res,next)=>{
     try {
@@ -24,13 +22,14 @@ exports.getChallenge = async(req,res,next)=>{
 
 exports.uploadChallenge = async(req,res,next)=>{
     try{
-        const start = req.body.startDay
-        const end = req.body.endDay
+        const start = new Date(req.body.startDay);
+        const end = new Date(req.body.endDay);
+        const duration = Math.floor((end - start) / (1000 * 60 * 60 * 24));
         const challenge = await Challenge.create({
             ...req.body,
             UserId:req.user.id,
-            img: req.file ? `/uploads/challenge/${req.file.filename}` : "빈 이미지",
-            duration: Math.floor((end - start) / (1000 * 60 * 60 * 24))
+            img: req.file ? `/uploads/challenge/${req.file.filename}` : `/uploads/challenge/default.png`,
+            duration : duration
         })
         res.json({
             code:200,
