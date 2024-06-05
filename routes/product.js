@@ -56,25 +56,25 @@ router.patch('/:productId', verifyToken, modifyProduct);
 router.delete('/:productId',verifyToken, deleteProduct);
 // router.post('/',uploadImg) // 미완성 -> 커뮤니티는 이미지 업로드가 필요하다
 
-// /products/cart/:id -> cart에서 다시 뿌려줄때 id가??? 
+// /product/cart/:id -> cart에서 다시 뿌려줄때 id가??? 
 router.get('/cart', verifyToken, getCart)
-router.get('/cart',verifyToken,uploadCart)
+router.post('/cart',verifyToken,uploadCart)
 router.patch('/cart/:productId', verifyToken, modifyCart)
 router.delete('/cart/:productId',verifyToken, deleteCart)
 
-// /products/purchased/:userid -> userid 부분 다 미들웨어로 교체해야한다.
+// /product/purchased/:userid -> userid 부분 다 미들웨어로 교체해야한다.
 router.get('/purchased/', verifyToken, getPurchased)
 router.post('/purchased/:productId', verifyToken, uploadPurchased)
 router.delete('/purchased/:productId', verifyToken, deletePurchased)
 // 구매목록은 수정은 없다 -> 삭제와 등록만 있다
 
-// /products/review/ -> 아이디 필요 x 물건에 대한 리뷰만 가져오면 된다.
+// /product/review/ -> 아이디 필요 x 물건에 대한 리뷰만 가져오면 된다.
 router.get('/review', getReview); 
 router.post('/review', reviewimgupload.single('img'),uploadReview);
 router.put('/review/:reviewId',modifyReview);
 router.delete('/review/:reviewId',deleteReview);
 
-// /products/enquiry/ -> 아이디 필요 x 물건에 대한 리뷰만 가져오면 된다.
+// /product/enquiry/ -> 아이디 필요 x 물건에 대한 리뷰만 가져오면 된다.
 router.get('/enquiry', getEnquiry); 
 router.post('/enquiry',enquiryimgupload.single('img'),uploadEnquiry);
 router.put('/enquiry/:enquiryId',modifyEnquiry);
