@@ -1,14 +1,13 @@
-const { Cart, Success } = require('../models');
+const { Cart, Success, Product } = require('../models');
 const op = require('sequelize').Op;
 
 
 exports.getCart = async(req,res,next)=>{
     try{
         const cart= await Cart.findAll({
-            where:{id:req.user.id},
+            where:{UserId:req.user.id},
             include: {
-                model: User,
-                attributes: ['id']
+                model: Product
             }
         });
         res.json({
@@ -62,7 +61,7 @@ exports.deleteCart = async(req,res,next)=>{
         await Cart.destroy({
             where:{id: req.params.productId}
         })
-        res.jsont({
+        res.json({
             code:200,
             message:"상품이 삭제 되었습니다."
         })
