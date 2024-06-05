@@ -43,7 +43,7 @@ exports.uploadNotification = async(req,res,next)=>{
 
 exports.deleteNotification=async(req,res,next)=>{
     try {
-        const notifi = await Notification.destroy({
+        await Notification.destroy({
             where:{id:req.body.id}
         })
         res.json({
