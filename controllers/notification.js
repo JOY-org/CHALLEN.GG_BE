@@ -48,7 +48,7 @@ exports.deleteNotification=async(req,res,next)=>{
         })
         res.json({
             code:200,
-            message:"알리 삭제가 완료되었습니다."
+            message:"알림 삭제가 완료되었습니다."
         })
     } catch (err) {
         console.error(err);
