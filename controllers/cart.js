@@ -1,14 +1,13 @@
-const { Cart, Success } = require('../models');
+const { Cart, Success, Product } = require('../models');
 const op = require('sequelize').Op;
 
 
 exports.getCart = async(req,res,next)=>{
     try{
         const cart= await Cart.findAll({
-            where:{id:req.user.id},
+            where:{UserId:req.user.id},
             include: {
-                model: User,
-                attributes: ['id']
+                model: Product
             }
         });
         res.json({
@@ -23,16 +22,33 @@ exports.getCart = async(req,res,next)=>{
 
 exports.uploadCart= async(req,res,next)=>{
     try {
-        const cart = await Cart.create({
-            count:req.body.count,
-            ProductId:req.body.productId,
-            UserId: req.user.id
+        const { count }= req.body;
+        const excart = await Cart.findOne({
+            where :{
+                ProductId:req.body.productId,
+                UserId: req.user.id
+            }
         })
-        res.json({
-            code:200,
-            message:"장바구니에 상품을 담았습니다.",
-            payload:cart
-        })
+        if(excart){
+            excart.count = excart.count+ count ;
+            await excart.save();
+            res.json({
+                code:200,
+                message:"장바구니에 상품이 존재하여 갯수를 추가하였습니다.",
+                payload:excart
+            })
+        }else{
+            const newcart = await Cart.create({
+                count,
+                ProductId:req.body.productId,
+                UserId: req.user.id
+            });
+            res.json({
+                code:200,
+                message:"장바구니에 새로운 상품을 추가하였습니다.",
+                payload: newcart
+            })
+        }
     } catch (err) {
         console.error(err);
         next(err)
@@ -62,7 +78,7 @@ exports.deleteCart = async(req,res,next)=>{
         await Cart.destroy({
             where:{id: req.params.productId}
         })
-        res.jsont({
+        res.json({
             code:200,
             message:"상품이 삭제 되었습니다."
         })

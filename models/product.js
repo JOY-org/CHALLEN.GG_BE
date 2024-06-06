@@ -3,11 +3,6 @@ const Sequelize= require('sequelize')
 class Product extends Sequelize.Model{
     static initiate(sequelize){
         Product.init({
-            img:{
-                type:Sequelize.TEXT,
-                allowNull:false,
-                defaultValue:"이미지 주소",
-            },
             name:{
                 type:Sequelize.STRING(20),
                 allowNull:false
@@ -50,6 +45,8 @@ class Product extends Sequelize.Model{
         db.Product.hasMany(db.Review);
         db.Product.hasMany(db.Enquiry);
         db.Product.hasMany(db.Purchased);
+        
+        db.Product.hasMany(db.ProductImg);
     }
 }
 

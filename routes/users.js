@@ -38,7 +38,7 @@ router.delete('/', verifyToken, deleteUser)
 router.get('/notification',verifyToken, getNotification)
 router.post('/notification',verifyToken,uploadNotification)
 router.patch('/notification',verifyToken, modifyNotification)
-router.delete('/notification',verifyToken, deleteNotification)
+router.delete('/notification/',verifyToken, deleteNotification)
 
 
 //팔로우

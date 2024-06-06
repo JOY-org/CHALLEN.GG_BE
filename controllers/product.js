@@ -1,12 +1,13 @@
-const {Product} = require('../models');
+const {Product,ProductImg} = require('../models');
 const op = require('sequelize').Op;
 
 exports.getProduct=async(req,res,next)=>{
     try {
         const product = await Product.findAll()
+        const productimg = await ProductImg.findAll()
         res.json({
             code:200,
-            payload: product
+            payload: {product,productimg}
         })
     } catch (err) {
         console.error(err);
@@ -17,8 +18,7 @@ exports.getProduct=async(req,res,next)=>{
 exports.uploadProduct=async(req,res,next)=>{
     try {
         const product= await Product.create({
-            ...req.body,
-            img: req.file ? `/uploads/product/${req.file.filename}` : "빈 이미지"
+            ...req.body
         })
         if (!req.body.name || (req.body.name && req.body.name.trim() === '')) {
             return res.status(400).json({ code: 400, message: "Product name is required." });

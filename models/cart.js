@@ -18,7 +18,7 @@ class Cart extends Sequelize.Model{
     static associate(db){
         //관계들어갈 곳
         db.Cart.belongsTo(db.User)
-        // db.Cart.belongsTo(db.Product)
+        db.Cart.belongsTo(db.Product)
     }
 }
 
