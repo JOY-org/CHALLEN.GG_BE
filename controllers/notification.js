@@ -43,12 +43,12 @@ exports.uploadNotification = async(req,res,next)=>{
 
 exports.deleteNotification=async(req,res,next)=>{
     try {
-        const notifi = await Notification.destroy({
+        await Notification.destroy({
             where:{id:req.body.id}
         })
         res.json({
             code:200,
-            message:"알리 삭제가 완료되었습니다."
+            message:"알림 삭제가 완료되었습니다."
         })
     } catch (err) {
         console.error(err);

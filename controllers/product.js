@@ -7,10 +7,17 @@ exports.getProduct=async(req,res,next)=>{
             include: {
                 model: ProductImg
             }
+<<<<<<< HEAD
         })
         res.json({
             code:200,
             payload: {product}
+=======
+        });
+        res.json({
+            code:200,
+            payload: product
+>>>>>>> 091a92e9a43573515b1b829bdfc8c8edc32aa862
         })
     } catch (err) {
         console.error(err);
