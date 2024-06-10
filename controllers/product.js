@@ -3,11 +3,14 @@ const op = require('sequelize').Op;
 
 exports.getProduct=async(req,res,next)=>{
     try {
-        const product = await Product.findAll()
-        const productimg = await ProductImg.findAll()
+        const product = await Product.findAll({
+            include: {
+                model: ProductImg
+            }
+        });
         res.json({
             code:200,
-            payload: {product,productimg}
+            payload: product
         })
     } catch (err) {
         console.error(err);
